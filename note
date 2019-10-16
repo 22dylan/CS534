@@ -11,7 +11,6 @@ What I think happens:
 2) saves changes locally
 3) pulls what is on github to local machine
 4) pushes what is on local (plus what was obtained in 3) to github
-<<<<<<< HEAD
 
 
 Figure out how to get forks into master...
