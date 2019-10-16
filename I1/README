@@ -1,0 +1,21 @@
+CS 534 implementation problem one. 
+
+team members
+-------------------------
+Derek Jackson
+Meredith Leung
+Dylan Sanderson
+
+
+problem description
+-------------------------
+a set of training data representing housing characteristics (sq. footage, water view, etc.) was provided (X)
+using the training data, the housing value was predicted (Y)
+batch gradient descent was used to determine the slope factors (W)
+
+
+python and package information
+-------------------------
+python    #.#
+numpy     #.#
+others?
