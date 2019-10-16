@@ -1,15 +1,14 @@
 import os
 import numpy as np
 from run_bgd import run_bgd
-# from data_reader import data_reader
-from 
+from data_reader import data_reader
 
 
-""" loading in data
-	both normalized and raw """
+""" loading in data both normalized and raw """
 
-normed_data = data_reader(norm=True)
-raw_data = data_reader(norm=False)
+#path=('/C:/User/mleung/Desktop/CS534-master/I1/data/PA1_train.csv')
+normed_data = data_reader(path,norm=True)
+raw_data = data_reader(path,norm=False)
 
 
 # --- part 1 --- 
