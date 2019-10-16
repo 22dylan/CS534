@@ -1,4 +1,4 @@
-# from bgd import bgd
+from BatchGradientDescent import bgd
 
 def run_bgd(data, step_size_vals, lambda_vals):
 	w = {}
