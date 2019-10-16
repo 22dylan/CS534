@@ -1,6 +1,6 @@
-from bgd import bgd
+# from bgd import bgd
 
-def run_bgd(step_size_vals, lambda_vals):
+def run_bgd(data, step_size_vals, lambda_vals):
 	w = {}
 	for step_size in step_size_vals:
 		w[step_size] = {}

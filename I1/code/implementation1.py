@@ -6,10 +6,9 @@ from data_reader import data_reader
 
 """ loading in data both normalized and raw """
 
-#path=('/C:/User/mleung/Desktop/CS534-master/I1/data/PA1_train.csv')
+path = os.path.join(os.getcwd(), '..', 'data', 'PA1_train.csv')
 normed_data = data_reader(path,norm=True)
 raw_data = data_reader(path,norm=False)
-
 
 # --- part 1 --- 
 """ description here """

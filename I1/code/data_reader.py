@@ -35,6 +35,6 @@ def data_reader(path, norm):
     if norm==True:
         for feat in features:
             df[feat]=df[feat]/df[feat].max()
-        
+
     data=df.to_numpy()
     return data
