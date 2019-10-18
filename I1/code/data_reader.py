@@ -27,7 +27,8 @@ def data_reader(path, norm, normval=None):
             # normval=df/df.max()
             normval = df.max()
         for feat in features:
-            df[feat]=df[feat]/normval[feat]
+            if feat in df.keys():
+                df[feat]=df[feat]/normval[feat]
 
     data=df.to_numpy()
     return data, normval
