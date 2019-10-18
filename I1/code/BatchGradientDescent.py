@@ -40,7 +40,7 @@ def bgd(lambda_reg, stepSize, data):
         # print("w: {0}".format(w))
         # print("")
         # input()
-
+    print(w)
     return w, count, sumErr
 
 # bgd(0, .01, test)

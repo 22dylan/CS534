@@ -15,7 +15,7 @@ path_to_output = os.path.join(os.getcwd(), '..', 'output')				# path to output
 print('Reading Data')
 
 normed_data, normval = data_reader(path_to_data,norm=True)		# reading in normalized data
-# raw_data, _ = data_reader(path_to_data,norm=False)				# reading in raw data
+raw_data, _ = data_reader(path_to_data,norm=False)				# reading in raw data
 
 normalizing_values_out = os.path.join(path_to_output, 'normalizing_values.csv')	# path to save normalized values
 pd.DataFrame(normval).to_csv(normalizing_values_out)			# saving normalizing values
