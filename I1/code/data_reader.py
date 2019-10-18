@@ -21,14 +21,12 @@ def data_reader(path, norm, normval=None):
     num_features=['waterfront','condition','grade']
     
     #normalize data to range of 0 to 
-    
     if norm==True:
         if normval is None:
             # normval=df/df.max()
             normval = df.max()
         for feat in features:
             if feat in df.keys():
-                df[feat]=df[feat]/normval[feat]
-
+                df[feat]=df[feat]/float(normval[feat])
     data=df.to_numpy()
     return data, normval
