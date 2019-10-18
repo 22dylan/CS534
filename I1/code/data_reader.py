@@ -1,12 +1,13 @@
 import numpy as np
 import pandas as pd
 from datetime import datetime
+pd.set_option('display.max_columns', None)
 
 def data_reader(path, norm, normval=None):
     p=0 #change to something else to not create plots of input data
     df = pd.read_csv(path)
     df = df.drop('id',axis=1) #remove id column
-#    
+
     df['year']=pd.DatetimeIndex(df['date']).year #create day mo yr columns
     df['month']=pd.DatetimeIndex(df['date']).month
     df['day']=pd.DatetimeIndex(df['date']).day
@@ -22,10 +23,10 @@ def data_reader(path, norm, normval=None):
     
     if norm==True:
         if normval is None:
-            normval=df/df.max()
+            # normval=df/df.max()
+            normval = df.max()
         for feat in features:
             df[feat]=df[feat]/normval[feat]
-                
-    data=df.to_numpy()
 
+    data=df.to_numpy()
     return data, normval

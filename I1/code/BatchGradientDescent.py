@@ -14,6 +14,7 @@ def bgd(lambda_reg, stepSize, data):
     #start with gradient of loss above .5
     loss_gradient = np.full(params_len,1) 
 
+    count = 0
     #repeat until convergence
     while (np.linalg.norm(loss_gradient) >= 0.5):
         sumErr = np.zeros(params_len) #init to zero
@@ -25,7 +26,7 @@ def bgd(lambda_reg, stepSize, data):
             # print(x_i)
             sumErr = sumErr + (y_i - np.dot(w.T,x_i))*x_i
 
-            #debug info
+            # #debug info
             # print("w: {0}".format(w))
             # print("x_i: {0}".format(x_i))
             # print("y_i: {0}".format(y_i))
@@ -35,13 +36,12 @@ def bgd(lambda_reg, stepSize, data):
 
         loss_gradient = (-2)*sumErr + 2*lambda_reg*w
         w = w - stepSize*loss_gradient
-        
-        print("w: {0}".format(w))
+        count += 1
+        # print("w: {0}".format(w))
         # print("")
         # input()
 
-
-    return w
+    return w, count, sumErr
 
 # bgd(0, .01, test)
 
