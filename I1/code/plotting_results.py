@@ -2,6 +2,9 @@ import os
 import numpy as np
 import pickle
 import matplotlib.pyplot as plt
+import matplotlib
+matplotlib.use('TkAgg')
+
 
 
 path_to_output = os.path.join(os.getcwd(), '..', 'output')				# path to output

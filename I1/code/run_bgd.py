@@ -16,7 +16,6 @@ def run_bgd(data, step_size_vals, lambda_vals, path_to_pickle):
 			w[trial_str]['w_values'], w[trial_str]['convergence_count'], w[trial_str]['SSE'] =  bgd(lambda_reg, step_size,data)
 			count += 1
 	# saving results to a pickle
-	print(w.keys())
 	with open(path_to_pickle, 'wb') as f:
 		pickle.dump(w, f, pickle.HIGHEST_PROTOCOL)
 
