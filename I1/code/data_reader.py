@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+import csv
 from datetime import datetime
 pd.set_option('display.max_columns', None)
 
@@ -30,3 +31,21 @@ def data_reader(path, norm, normval=None):
                 df[feat]=df[feat]/float(normval[feat])
     data=df.to_numpy()
     return data, normval
+
+
+def save_results(filename, results, data_norm, norm_scale):
+    #format results of w
+    results_flat = []
+
+    for trial in results:
+        new_row = [trial['step_size'], trial['lambda_reg'], trial['convergence_count'], trial['SSE']]
+        for vals in trial['w_values']:
+            new_row.append(vals)
+
+        results_flat.append(new_row)
+
+    #save results of w
+    with open("../output/{0}_w.csv".format(filename), mode='w') as w_file:
+        w_writer = csv.writer(w_file, delimiter=',')
+        for row in results_flat:
+            w_writer.writerow(row)
