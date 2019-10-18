@@ -28,6 +28,6 @@ def data_reader(path, norm, normval=None):
             normval = df.max()
         for feat in features:
             df[feat]=df[feat]/normval[feat]
-    print(df.head(5))
+
     data=df.to_numpy()
     return data, normval
