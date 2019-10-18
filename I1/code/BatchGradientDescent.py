@@ -7,7 +7,7 @@ import csv
 
 def bgd(lambda_reg, stepSize, data):
     
-    iterations = 0
+    iteration = 0
     SSE_results = []
 
     #initialize w to number of parameters, ignoring cost column
@@ -29,18 +29,19 @@ def bgd(lambda_reg, stepSize, data):
             # print(x_i)
             sumErr = sumErr + (y_i - np.dot(w.T,x_i))*x_i
 
+        #compute gradient of loss fn and get new w
         loss_gradient = (-2)*sumErr + 2*lambda_reg*w
         w = w - stepSize*loss_gradient
 
-        iterations = iterations + 1
+        iteration = iteration + 1
 
-        #save sum square error every 100 iterations
-        if (iterations%100 == 0):
-            SSE_results.append([iterations, np.linalg.norm(sumErr)])
+        #save sum square error every 100 iteration
+        if (iteration%100 == 0):
+            SSE_results.append([iteration, sumErr])
 
         #print info to know its working
-        if (iterations%1000 == 0):
-            print("Done with iteration {0}".format(iterations))
+        if (iteration%1000 == 0):
+            print("Done with iteration {0}".format(iteration))
             print("|loss_gradient|: {0}".format(np.linalg.norm(loss_gradient)))
             print("y_i: {0}".format(y_i))
             print("w.T*x_i: {0}".format(np.dot(w.T,x_i)))
@@ -54,9 +55,9 @@ def bgd(lambda_reg, stepSize, data):
         if (np.linalg.norm(loss_gradient) > 10**30):
             break
 
-    print("Regression complete with iteration: {0}".format(iterations))
+    print("Regression complete with iteration: {0}".format(iteration))
     print("|loss_gradient|: {0}".format(np.linalg.norm(loss_gradient)))
-    print("SSE_results: {0}".format(SSE_results))
+    # print("SSE_results: {0}".format(SSE_results))
     print("w: {0}".format(w))
     # print("x_i: {0}".format(x_i))
     print("y_i: {0}".format(y_i))
@@ -64,7 +65,7 @@ def bgd(lambda_reg, stepSize, data):
     # print("sumErr: {0}".format(sumErr))
     print("")
     # input()
-    return w, iterations, SSE_results
+    return w, iteration, SSE_results
 
 # bgd(0, .01, test)
 
