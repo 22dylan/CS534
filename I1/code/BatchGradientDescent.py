@@ -21,16 +21,17 @@ def bgd(lambda_reg, stepSize, data):
             # print(row)
             y_i = row[params_len]
             x_i = row[0:params_len]
-            
+            # print(y_i)
+            # print(x_i)
             sumErr = sumErr + (y_i - np.dot(w.T,x_i))*x_i
 
             #debug info
-            print("w: {0}".format(w))
-            print("x_i: {0}".format(x_i))
-            print("y_i: {0}".format(y_i))
-            print("w.T*x_i: {0}".format(np.dot(w.T,x_i)))
-            print("sumErr: {0}".format(sumErr))
-            print("")
+            # print("w: {0}".format(w))
+            # print("x_i: {0}".format(x_i))
+            # print("y_i: {0}".format(y_i))
+            # print("w.T*x_i: {0}".format(np.dot(w.T,x_i)))
+            # print("sumErr: {0}".format(sumErr))
+            # print("")
 
         loss_gradient = (-2)*sumErr + 2*lambda_reg*w
         w = w - stepSize*loss_gradient
