@@ -5,7 +5,7 @@ import csv
 # test = np.random.rand(5,5)
 # test = np.full((50,4),.5)
 
-def bgd(lambda_reg, stepSize, data):
+def bgd(lambda_reg, stepSize, data, maxIterations=50000, result_res=100):
     
     iteration = 0
     SSE_results = []
@@ -36,7 +36,7 @@ def bgd(lambda_reg, stepSize, data):
         iteration = iteration + 1
 
         #save sum square error every 100 iteration
-        if (iteration%100 == 0):
+        if (iteration%result_res == 0):
             SSE_results.append([iteration, sumErr])
 
         #print info to know its working
@@ -53,6 +53,9 @@ def bgd(lambda_reg, stepSize, data):
         
         #stop if diverging
         if (np.linalg.norm(loss_gradient) > 10**30):
+            break
+        #stop if exceeding max iterations
+        if (iteration > maxIterations):
             break
 
     print("Regression complete with iteration: {0}".format(iteration))
