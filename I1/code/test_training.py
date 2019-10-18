@@ -1,6 +1,7 @@
 import os
 import pandas as pd
 import pickle
+import numpy as np
 
 from data_reader import data_reader
 
@@ -8,6 +9,7 @@ from data_reader import data_reader
 path_to_data = os.path.join(os.getcwd(), '..', 'data')	# path to data
 path_to_output = os.path.join(os.getcwd(), '..', 'output')				# path to output
 
+# reading in data
 normval = os.path.join(path_to_output, 'normalizing_values.csv')
 normval = pd.read_csv(normval).set_index('Unnamed: 0').transpose()
 
@@ -24,5 +26,5 @@ results_p2 = pickle.load(open(part_2_pickle, "rb" ))
 # results_p3 = pickle.load(open(part_3_pickle, "rb" ))
 
 w_p1 = results_p1['trial_0']['w_values']
-
-
+price = test_data.dot(w_p1)
+print(price)
