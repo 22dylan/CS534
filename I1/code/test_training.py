@@ -16,7 +16,6 @@ normval = pd.read_csv(normval).set_index('Unnamed: 0').transpose()
 test_data = os.path.join(path_to_data, 'PA1_test.csv')
 test_data, normval = data_reader(test_data,norm=True, normval=normval)		# reading in normalized data
 
-
 part_1_pickle = os.path.join(path_to_output, 'results_p1.pickle')
 part_2_pickle = os.path.join(path_to_output, 'results_p2.pickle')
 part_3_pickle = os.path.join(path_to_output, 'results_p3.pickle')
