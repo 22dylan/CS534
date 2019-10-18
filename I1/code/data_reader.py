@@ -42,13 +42,13 @@ def save_results(filename, results, data_norm, norm_scale):
 
     for trial in results:
         new_row = [trial['step_size'], trial['lambda_reg'], trial['convergence_count'], trial['SSE']]
-        for vals in w['w_values']:
+        for vals in trial['w_values']:
             new_row.append(vals)
 
         results_flat.append(new_row)
 
     #save results of w
-    with open("../results/{0}_w.csv".format(filename), mode='w') as w_file:
+    with open("../output/{0}_w.csv".format(filename), mode='w') as w_file:
         w_writer = csv.writer(w_file, delimiter=',')
         for row in results_flat:
             w_writer.writerow(row)
