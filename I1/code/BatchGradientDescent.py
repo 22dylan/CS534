@@ -36,7 +36,7 @@ def bgd(lambda_reg, stepSize, data):
         loss_gradient = (-2)*sumErr + 2*lambda_reg*w
         w = w - stepSize*loss_gradient
         
-        # print("w: {0}".format(w))
+        print("w: {0}".format(w))
         # print("")
         # input()
 
