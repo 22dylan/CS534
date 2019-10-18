@@ -29,7 +29,7 @@ def bgd(lambda_reg, stepSize, data):
 
         loss_gradient = (-2)*sumErr + 2*lambda_reg*w
         w = w - stepSize*loss_gradient
-        
+
         iterations = iterations + 1
         if (iterations%1000 == 0):
             print("Done with iteration {0}".format(iterations))
@@ -41,6 +41,10 @@ def bgd(lambda_reg, stepSize, data):
             # print("sumErr: {0}".format(sumErr))
             print("")
             # input()
+        
+        #stop if diverging
+        if (np.linalg.norm(loss_gradient) > 10**10):
+            break
 
     print("Regression complete with iteration: {0}".format(iterations))
     print("|loss_gradient|: {0}".format(np.linalg.norm(loss_gradient)))
