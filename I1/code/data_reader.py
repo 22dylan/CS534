@@ -36,20 +36,20 @@ def data_reader(path, norm, normval=None):
     data=df.to_numpy()
     return data, normval
 
-def save_results(filename, w, data_norm, norm_scale, iterations):
+def save_results(filename, results, data_norm, norm_scale):
     #format results of w
-    w_flat = []
-    for ssr_key, ssr_val in w.items():
-        for lvr_key, lvr_val in ssr_val.items():
-            new_row = [ssr_key,lvr_key ] #add keys
-            new_row.append(iterations[ssr_key][lvr_key]) #add iterations
-            for item in lvr_val: #add the data
-                new_row.append(item) 
-            w_flat.append(new_row)
+    results_flat = []
+
+    for trial in results:
+        new_row = [trial['step_size'], trial['lambda_reg'], trial['convergence_count'], trial['SSE']]
+        for vals in w['w_values']:
+            new_row.append(vals)
+
+        results_flat.append(new_row)
 
     #save results of w
     with open("../results/{0}_w.csv".format(filename), mode='w') as w_file:
         w_writer = csv.writer(w_file, delimiter=',')
-        for row in w_flat:
+        for row in results_flat:
             w_writer.writerow(row)
 

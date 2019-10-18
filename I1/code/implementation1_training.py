@@ -5,6 +5,7 @@ import pickle
 
 from run_bgd import run_bgd
 from data_reader import data_reader
+from data_reader import save_results
 
 
 # setting up paths
@@ -25,11 +26,12 @@ print('---------------')
 # --- training part 1 --- 
 print('Training with different learning rates')
 
-step_size = [10**0, 10**-1, 10**-2, 10**-3, 10**-4, 10**-5, 10**-6, 10**-7]	# learning rates or step sizes
+step_size = [10**-5] #[10**0, 10**-1, 10**-2, 10**-3, 10**-4, 10**-5, 10**-6, 10**-7]	# learning rates or step sizes
 lambda_vals = [0]				# regularization parameter set to 0
 path_to_pickle = os.path.join(path_to_output, 'results_p1.pickle')		# output pickle
 
 results_p1 = run_bgd(normed_data, step_size, lambda_vals, path_to_pickle)	# running batch gradient descent with above values
+# save_results("p1", results_p1, normed_data, [])
 print('---------------')
 
 

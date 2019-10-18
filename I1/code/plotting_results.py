@@ -17,7 +17,7 @@ results = pickle.load(open(part_1_pickle, "rb" ))
 learning_rates = [results[i]['step_size'] for i in results.keys()]
 SSE = [results[i]['SSE'] for i in results.keys()]
 convergence_count = [results[i]['convergence_count'] for i in results.keys()]
-print(results['trial_2'])
+print(results['trial_0'])
 
 fig, ax = plt.subplots(2, 1, figsize=(12,8))
 ax = np.array(ax)
