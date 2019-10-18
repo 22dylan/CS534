@@ -16,7 +16,8 @@ def data_reader(path, norm, normval=None):
 
     features=['bedrooms','bathrooms','sqft_living','sqft_lot','floors','waterfront',\
               'view','condition','grade','sqft_above','sqft_basement','yr_built',\
-              'yr_renovated','zipcode', 'lat','long','sqft_living15','sqft_lot15','price']
+              'yr_renovated','zipcode', 'lat','long','sqft_living15','sqft_lot15','price',\
+              'year', 'month', 'day']
     num_features=['waterfront','condition','grade']
     
     #normalize data to range of 0 to 
@@ -27,6 +28,6 @@ def data_reader(path, norm, normval=None):
             normval = df.max()
         for feat in features:
             df[feat]=df[feat]/normval[feat]
-
+    print(df.head(5))
     data=df.to_numpy()
     return data, normval
