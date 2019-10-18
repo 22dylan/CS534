@@ -22,19 +22,16 @@ def data_reader(path, norm, normval=None):
     num_features=['waterfront','condition','grade']
     
     #normalize data to range of 0 to 
-    
     if norm==True:
         if normval is None:
             # normval=df/df.max()
             normval = df.max()
-        df = df/df.max()
-        # for feat in features:
-        #     df[feat]=df[feat]/normval[feat]
-                
-    data=df.to_numpy()
-
+        for feat in features:
+            if feat in df.keys():
+                df[feat]=df[feat]/float(normval[feat])
     data=df.to_numpy()
     return data, normval
+
 
 def save_results(filename, results, data_norm, norm_scale):
     #format results of w
@@ -52,4 +49,3 @@ def save_results(filename, results, data_norm, norm_scale):
         w_writer = csv.writer(w_file, delimiter=',')
         for row in results_flat:
             w_writer.writerow(row)
-
