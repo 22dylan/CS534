@@ -15,6 +15,7 @@ def bgd(lambda_reg, stepSize, data):
     #start with gradient of loss above .5
     loss_gradient = np.full(params_len,100) 
 
+    count = 0
     #repeat until convergence
     while (np.linalg.norm(loss_gradient) >= 0.5):
         
