@@ -31,7 +31,7 @@ def val_pickle_to_csv(validation_name):
 # pickle_to_csv("results_p3")
 
 val_pickle_to_csv("results_validation_p1")
-val_pickle_to_csv("results_validation_p2_drs")
-val_pickle_to_csv("results_validation_p2_0to4")
-val_pickle_to_csv("results_validation_p2_2ndRun")
-val_pickle_to_csv("results_validation_p3")
+# val_pickle_to_csv("results_validation_p2_drs")
+# val_pickle_to_csv("results_validation_p2_0to4")
+# val_pickle_to_csv("results_validation_p2_2ndRun")
+# val_pickle_to_csv("results_validation_p3")

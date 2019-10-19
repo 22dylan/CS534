@@ -24,7 +24,7 @@ print('---------------')
 # # --- training part 1 --- 
 # print('Training with different learning rates')
 
-# step_size = [10**0, 10**-1, 10**-2, 10**-3, 10**-4, 10**-5, 10**-6, 10**-7]	# learning rates or step sizes
+# step_size = [10**0, 10**-1, 10**-2, 10**-3, 10**-4, 10**-5]	# learning rates or step sizes
 # lambda_vals = [0]				# regularization parameter set to 0
 # path_to_pickle = os.path.join(path_to_output, 'results_p1.pickle')		# output pickle
 
@@ -35,9 +35,9 @@ print('---------------')
 # --- training part 2 ---
 """ description here """
 print('Training with different learning rates and regularization paramters')
-step_size = [10**-5, 10**-6, 10**-7]
+step_size = [10**-5]
 lambda_vals = [0, 10**-3, 10**-2, 10**-1, 1, 10, 100]
-path_to_pickle = os.path.join(path_to_output, 'results_p2_drs.pickle')
+path_to_pickle = os.path.join(path_to_output, 'results_p2.pickle')
 
 results_p2 = run_bgd(normed_data, step_size, lambda_vals, path_to_pickle)
 print('---------------')
