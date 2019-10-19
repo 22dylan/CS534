@@ -6,6 +6,22 @@ Derek Jackson
 Meredith Leung
 Dylan Sanderson
 
+python and package information
+-------------------------
+python      3.7
+numpy       1.17.2
+pandas      0.25.1
+pickle      (native to python)
+matplotlib  3.1.1
+
+commands to run code: 
+      to train data: python implementation1.py
+      to get validation SSEs: python validation.py
+      to get test prices: python test_training.py
+
+more detailed description below----------------------------------------------------------------------------
+
+
 
 problem description
 -------------------------
@@ -14,8 +30,27 @@ using the training data, the housing value was predicted (Y)
 batch gradient descent was used to determine the slope factors (W)
 
 
-python and package information
+how to run this submission
 -------------------------
-python    #.#
-numpy     #.#
-others?
+structure of folders: within codes, the files needed to run this project are:
+  *implementation1.py (file used for training in pts. 1, 2, & 3)
+  *BatchGradientDescent.py (wrapper for calculating the batch gradient descent)
+  *run_bgd.py (function called in BatchGradientDescent.py)
+  *validation.py (returns SSE of validation data after predicting Y with training weights)
+  *test_training.py 
+  
+      these files call subcodes contained in a nested folder (fun_lib)
+        subcodes needed for these files are:
+            *data_reader.py (reads in and normalizes assigned csv files)
+            *price.py (returns predicted price from training weights and test data to test_training.py)
+            
+        some additional codes used for data visualization and processing are:
+            *pickle_to_csv.py
+            *plotting_results.py
+            *stats_plotting.py
+            
+ Results can be found in the output folder in both pickle and csv formats.
+      
+      
+
+
