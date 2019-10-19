@@ -51,8 +51,6 @@ def validate_W(part_num):
         w = trial['w_values']
         validation_SSE[key] = calcSSE(w, validation_data) 
 
-    path_to_pickle = os.path.join(path_to_output, validation_results_pickle_nm)
-
     # saving results to a pickle
     with open(path_to_pickle, 'wb') as f:
         pickle.dump(validation_SSE, f, pickle.HIGHEST_PROTOCOL)
