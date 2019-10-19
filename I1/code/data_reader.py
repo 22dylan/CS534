@@ -14,7 +14,6 @@ def data_reader(path, norm, normval=None):
     df['day']=pd.DatetimeIndex(df['date']).day
         
     df = df.drop('date',axis=1) #remove date column
-
     features=['bedrooms','bathrooms','sqft_living','sqft_lot','floors','waterfront',\
               'view','condition','grade','sqft_above','sqft_basement','yr_built',\
               'yr_renovated','zipcode', 'lat','long','sqft_living15','sqft_lot15','price',\
@@ -29,6 +28,10 @@ def data_reader(path, norm, normval=None):
         for feat in features:
             if feat in df.keys():
                 df[feat]=df[feat]/float(normval[feat])
+    df = df[['bedrooms','bathrooms','sqft_living','sqft_lot','floors','waterfront',\
+              'view','condition','grade','sqft_above','sqft_basement','yr_built',\
+              'yr_renovated','zipcode', 'lat','long','sqft_living15','sqft_lot15',\
+              'year', 'month', 'day', 'price']]
     data=df.to_numpy()
     return data, normval
 
