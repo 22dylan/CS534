@@ -83,8 +83,7 @@ def view_W_values(pickle_str, keys):
 		print(key)
 		print('\tstep_size: {}' .format(data_temp['step_size']))
 		print('\tlambda_reg: {}' .format(data_temp['lambda_reg']))
-		print('\tw_values: {}' .format(data_temp['w_values']))
-	
+		print('\tw_values: {}' .format(data_temp['w_values']))	
 	pass
 
 
@@ -98,26 +97,28 @@ def view_validation_results(pickle_str, keys):
 			print(np.linalg.norm(data_temp))
 
 
-trials = [['trial_35', 'trial_36', 'trial_37', 'trial_38', 'trial_39', 'trial_40', 'trial_41'],
-			['trial_42', 'trial_43', 'trial_44', 'trial_45', 'trial_46', 'trial_47', 'trial_48'],
-			['trial_49', 'trial_50', 'trial_51', 'trial_52', 'trial_53', 'trial_54', 'trial_55']
-		 ]
-
 def view_training_SSE_results(pickle_str, keys):
 	path_to_pickle = os.path.join(os.getcwd(), '..', 'output', pickle_str)
 	data = pickle.load(open(path_to_pickle, "rb" ))
 	print(data.keys())
+	SSE_ret = []
 	for i in range(len(keys)):
 		for key in keys[i]:
 			SSE = data[key]['SSE'][-1][1]
-			print(np.linalg.norm(SSE))
+			SSE_ret.append(np.linalg.norm(SSE))
+			print(SSE_ret[-1])
+
+	return SSE_ret
+
+trials = [
+			['trial_0', 'trial_1', 'trial_2', 'trial_3', 'trial_4', 'trial_5', 'trial_6']
+		 ]
 
 
-
-# plot_SSE_v_Iterations(pickle_str='results_p2.pickle', keys=trials)
+# plot_SSE_v_Iterations(pickle_str='results_p1_drs.pickle', keys=trials)
 # view_W_values(pickle_str = 'results_p2.pickle', keys=['trial_41', 'trial_42'])
-# view_validation_results(pickle_str='results_validation_p2.pickle', keys=[trials[0]])
-view_training_SSE_results(pickle_str='results_p2.pickle', keys=[trials[0]])
+# view_validation_results(pickle_str='results_validation_p1.pickle', keys=[trials[0]])
+# view_training_SSE_results(pickle_str='results_p1.pickle', keys=[trials[0]])
 
 
 plt.show()
