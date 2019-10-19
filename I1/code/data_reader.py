@@ -87,3 +87,11 @@ def validation_to_csv(csv_filename, validation):
         w_writer = csv.writer(w_file, delimiter=',')
         for row in results_flat:
             w_writer.writerow(row)
+
+
+def price_pickle_to_csv(part_num, predicted_y):
+    #save results of sse
+    with open("../output/csv/predicted_y_{0}.csv".format(part_num), mode='w', newline='') as w_file:
+        w_writer = csv.writer(w_file, delimiter=',')
+        for y in predicted_y:
+            w_writer.writerow([y])
