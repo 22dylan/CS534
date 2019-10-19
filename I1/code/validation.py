@@ -4,7 +4,6 @@ import pickle
 import numpy as np
 
 from data_reader import data_reader
-from data_reader import save_results
 
 #function to calculate sum squared error of a given
 #weight vector (w) and data matrix where the last column
@@ -52,8 +51,6 @@ def validate_W(part_num):
         w = trial['w_values']
         validation_SSE[key] = calcSSE(w, validation_data) 
 
-    # print(validation_SSE)
-
     path_to_pickle = os.path.join(path_to_output, validation_results_pickle_nm)
 
     # saving results to a pickle
@@ -63,3 +60,7 @@ def validate_W(part_num):
     # print(validation_SSE)
 
 validate_W("p1")
+validate_W("p2_0to4")
+validate_W("p2_drs")
+validate_W("p2_2ndRun")
+validate_W("p3")

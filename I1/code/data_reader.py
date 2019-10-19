@@ -68,3 +68,22 @@ def results_to_csv(csv_filename, results):
         w_writer = csv.writer(w_file, delimiter=',')
         for row in sse_results_flat:
             w_writer.writerow(row)
+
+
+def validation_to_csv(csv_filename, validation):
+    results_flat = []
+
+    for key, trial in validation.items():
+        # print(trial)
+        new_row = [key]
+        
+        #collect w
+        for vals in trial:
+            new_row.append(vals)
+        results_flat.append(new_row)
+
+    #save results of sse
+    with open("../output/csv/{0}.csv".format(csv_filename), mode='w', newline='') as w_file:
+        w_writer = csv.writer(w_file, delimiter=',')
+        for row in results_flat:
+            w_writer.writerow(row)
