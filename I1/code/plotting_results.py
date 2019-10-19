@@ -104,20 +104,20 @@ def view_training_SSE_results(pickle_str, keys):
 	SSE_ret = []
 	for i in range(len(keys)):
 		for key in keys[i]:
+			print(data[key].keys())
 			SSE = data[key]['SSE'][-1][1]
 			SSE_ret.append(np.linalg.norm(SSE))
 			print(SSE_ret[-1])
 
-	return SSE_ret
 
 trials = [
-			['trial_0', 'trial_1', 'trial_2', 'trial_3', 'trial_4', 'trial_5', 'trial_6']
+			['trial_0', 'trial_1', 'trial_2', 'trial_3', 'trial_4', 'trial_5', 'trial_6', 'trial_7']
 		 ]
 
 
 # plot_SSE_v_Iterations(pickle_str='results_p1_drs.pickle', keys=trials)
 # view_W_values(pickle_str = 'results_p2.pickle', keys=['trial_41', 'trial_42'])
-# view_validation_results(pickle_str='results_validation_p1.pickle', keys=[trials[0]])
+view_validation_results(pickle_str='results_validation_p1.pickle', keys=[trials[0]])
 # view_training_SSE_results(pickle_str='results_p1.pickle', keys=[trials[0]])
 
 
