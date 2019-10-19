@@ -1,9 +1,10 @@
 import os
 import numpy as np
 import pickle
+import matplotlib
+matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
-# import matplotlib
-# matplotlib.use('TkAgg')
+import matplotlib.patches as mpatches
 
 """ 
 	code for viewing results.
@@ -27,31 +28,46 @@ def plot_SSE_v_Iterations(pickle_str, keys):
 
 	data = pickle.load(open(path_to_pickle, "rb" ))
 
-	num_subplots = len(keys)
-	fig, ax = plt.subplots(num_subplots, 1, figsize=(12,8))
+	num_keys = len(keys)
+	fig, ax = plt.subplots(1, 1, figsize=(12,8))
 	labels=[]
-	if num_subplots > 1:
-		ax.flatten()
-	for i in range(num_subplots):
+	colors = ['k', 'r', 'b']
+	linestyle = ['-', ':', '-.', '-', ':', '-.', '-', ':', '-.']
+	markers = ['.', '<', '^', 'v', '>', '+', 's']
+
+	for i in range(num_keys):
+		count = 0
 		for key in keys[i]:
 			data_temp = data[key]
 
 			SSE = [np.linalg.norm(data_temp['SSE'][i][1]) for i in range(len(data_temp['SSE']))]
 			iteration = [data_temp['SSE'][i][0] for i in range(len(data_temp['SSE']))]
 
-			label_val = 'learning_rate: {}' .format(data_temp['lambda_reg'])
 			if i == 0:
-				labels.append('learning_rate: {}' .format(data_temp['lambda_reg']))
-			ax[i].plot(iteration, SSE, label=label_val)
-			ax[i].grid(which='minor', alpha=0.25, color = 'k', ls = ':')
-			ax[i].grid(which='major', alpha=0.40, color = 'k', ls = '--')
-		
-		ax[i].set_title(r'$\lambda = {}$' .format(data_temp['step_size']))
-		ax[i].set_ylabel('SSE')
-		ax[i].set_xscale('log')
+				labels.append(r'$\lambda$= {}' .format(data_temp['lambda_reg']))
 
-	ax[-1].set_xlabel('Iteration')
-	plt.subplots_adjust(hspace=0.3, bottom=0.13)
+			ax.plot(iteration, SSE, color=colors[i], marker=markers[count], markevery=0.1, ls=linestyle[count])
+
+			ax.grid(which='minor', alpha=0.25, color = 'k', ls = ':')
+			ax.grid(which='major', alpha=0.40, color = 'k', ls = '--')
+			count += 1
+
+
+
+
+		ax.set_title('Training SSE')
+		ax.set_ylabel('SSE')
+		ax.set_xscale('log')
+		ax.set_yscale('log')
+	ax.set_xlabel('Iteration')
+	plt.subplots_adjust(bottom=0.15)
+
+	black_patch = mpatches.Patch(color='k', label=r'Learning Rate: $10^{-5}$')
+	red_patch = mpatches.Patch(color='r', label=r'Learning Rate: $10^{-6}$')
+	blue_patch = mpatches.Patch(color='b', label=r'Learning Rate: $10^{-7}$')
+	ax.legend(handles=[black_patch, red_patch, blue_patch])
+
+
 	fig.legend(labels = labels, loc="lower center", ncol=4)
 
 def view_W_values(pickle_str, keys):
@@ -80,7 +96,7 @@ trials = [['trial_0', 'trial_1', 'trial_2', 'trial_3', 'trial_4', 'trial_5', 'tr
 		 ]
 
 plot_SSE_v_Iterations(pickle_str='results_p2_drs.pickle', keys=trials)
-view_W_values(pickle_str = 'results_p2_drs.pickle', keys=['trial_4', 'trial_18'])
+# view_W_values(pickle_str = 'results_p2_drs.pickle', keys=['trial_4', 'trial_18'])
 
 
 plt.show()
