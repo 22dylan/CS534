@@ -80,6 +80,7 @@ def view_W_values(pickle_str, keys):
 	data = pickle.load(open(path_to_pickle, "rb" ))
 	for key in keys:
 		data_temp = data[key]
+		print(data_temp)
 		print(key)
 		print('\tstep_size: {}' .format(data_temp['step_size']))
 		print('\tlambda_reg: {}' .format(data_temp['lambda_reg']))
@@ -95,8 +96,8 @@ trials = [['trial_0', 'trial_1', 'trial_2', 'trial_3', 'trial_4', 'trial_5', 'tr
 			['trial_14', 'trial_15', 'trial_16', 'trial_17', 'trial_18', 'trial_19', 'trial_20']
 		 ]
 
-plot_SSE_v_Iterations(pickle_str='results_p2_drs.pickle', keys=trials)
-# view_W_values(pickle_str = 'results_p2_drs.pickle', keys=['trial_4', 'trial_18'])
+# plot_SSE_v_Iterations(pickle_str='results_p2_drs.pickle', keys=trials)
+view_W_values(pickle_str = 'results_validation_p2_2ndRun.pickle', keys=['trial_4', 'trial_18'])
 
 
 plt.show()
