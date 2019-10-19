@@ -16,3 +16,7 @@ def pickle_to_csv(results_name):
 
 
 pickle_to_csv("results_p1")
+pickle_to_csv("results_p3")
+pickle_to_csv("results_p2_drs")
+pickle_to_csv("results_p2_0to4")
+pickle_to_csv("results_p3")

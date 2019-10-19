@@ -58,13 +58,13 @@ def results_to_csv(csv_filename, results):
 
 
     #save results of w
-    with open("../output/{0}_w.csv".format(csv_filename), mode='w', newline='') as w_file:
+    with open("../output/csv/{0}_w.csv".format(csv_filename), mode='w', newline='') as w_file:
         w_writer = csv.writer(w_file, delimiter=',')
         for row in w_results_flat:
             w_writer.writerow(row)
     
     #save results of sse
-    with open("../output/{0}_sse.csv".format(csv_filename), mode='w', newline='') as w_file:
+    with open("../output/csv/{0}_sse.csv".format(csv_filename), mode='w', newline='') as w_file:
         w_writer = csv.writer(w_file, delimiter=',')
         for row in sse_results_flat:
             w_writer.writerow(row)
