@@ -33,19 +33,38 @@ def data_reader(path, norm, normval=None):
     return data, normval
 
 
-def save_results(filename, results):
+def results_to_csv(csv_filename, results):
     #format results of w
-    results_flat = []
+    w_results_flat = []
+    sse_results_flat = []
 
-    for trial in results:
-        new_row = [trial['step_size'], trial['lambda_reg'], trial['convergence_count'], trial['SSE']]
+    for key, trial in results.items():
+        # print(trial)
+        w_new_row = [key, trial['step_size'], trial['lambda_reg'], trial['convergence_count']]
+        SSE_new_row = [key]
+        
+        #collect w
         for vals in trial['w_values']:
-            new_row.append(vals)
+            w_new_row.append(vals)
 
-        results_flat.append(new_row)
+        #collect SSE
+        for sse in trial['SSE']:
+            for val in sse[1]:
+                SSE_new_row.append(val)
+
+        w_results_flat.append(w_new_row)
+        sse_results_flat.append(SSE_new_row)
+
+
 
     #save results of w
-    with open("../output/{0}_w.csv".format(filename), mode='w') as w_file:
+    with open("../output/{0}_w.csv".format(csv_filename), mode='w', newline='') as w_file:
         w_writer = csv.writer(w_file, delimiter=',')
-        for row in results_flat:
+        for row in w_results_flat:
+            w_writer.writerow(row)
+    
+    #save results of sse
+    with open("../output/{0}_sse.csv".format(csv_filename), mode='w', newline='') as w_file:
+        w_writer = csv.writer(w_file, delimiter=',')
+        for row in sse_results_flat:
             w_writer.writerow(row)
