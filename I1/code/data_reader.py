@@ -33,7 +33,7 @@ def data_reader(path, norm, normval=None):
     return data, normval
 
 
-def save_results(filename, results, data_norm, norm_scale):
+def save_results(filename, results):
     #format results of w
     results_flat = []
 
