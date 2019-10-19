@@ -45,8 +45,8 @@ print('---------------')
 
 # # --- training part 3 ---
 # print('Training on non-normalized data')
-# step_size = [10**0, 10**-1, 10**-2, 10**-3, 10**-4, 10**-5, 10**-6, 10**-7]
-# lambda_vals = [0, 10**-3, 10**-2, 10**-1, 1, 10, 100]
+#step_size = [10**0, 0, 10**-3, 10**-6, 10**-9, 10**-15]
+#lambda_vals = [0]
 # path_to_pickle = os.path.join(path_to_output, 'results_p3.pickle')
 
 # results_p3 = run_bgd(raw_data, step_size, lambda_vals, path_to_pickle)
