@@ -19,3 +19,11 @@ python and package information
 python    #.#
 numpy     #.#
 others?
+
+
+workflow
+-------------------------
+implementation1_training.py - the data is trained using this file
+
+1) run implementation1_training.py
+2) 

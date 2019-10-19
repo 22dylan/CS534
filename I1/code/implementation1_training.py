@@ -24,7 +24,7 @@ print('---------------')
 # --- training part 1 --- 
 print('Training with different learning rates')
 
-step_size = [10**0, 10**-1, 10**-2, 10**-3, 10**-4, 10**-5, 10**-6, 10**-7]	# learning rates or step sizes
+step_size = [10**0, 10**-1, 10**-2, 10**-3, 10**-4, 10**-5]	# learning rates or step sizes
 lambda_vals = [0]				# regularization parameter set to 0
 path_to_pickle = os.path.join(path_to_output, 'results_p1.pickle')		# output pickle
 
