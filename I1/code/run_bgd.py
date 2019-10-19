@@ -11,7 +11,8 @@ def run_bgd(data, step_size_vals, lambda_vals, path_to_pickle):
 			w[trial_str]['step_size'] = step_size 	# storing step size in dictionary
 			w[trial_str]['lambda_reg'] = lambda_reg	# storing lambda (regularizing) value in dictionary
 			
-			print('\tstep_size: {}, lambda: {}' .format(step_size, lambda_reg))
+			print('------------------------------------------------------------------------------------------')
+			print('step_size: {}, lambda: {}' .format(step_size, lambda_reg))
 
 			w[trial_str]['w_values'], w[trial_str]['convergence_count'], w[trial_str]['SSE'] =  bgd(lambda_reg, step_size,data)
 			count += 1
