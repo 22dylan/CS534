@@ -2,9 +2,11 @@ import os
 import numpy as np
 import pickle
 import matplotlib
+
 matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
+
 """ 
 	code for viewing results.
 	see excel sheet "output/pickle_summary.xlsx" for a summary
@@ -12,25 +14,26 @@ import matplotlib.patches as mpatches
 """
 
 
-def plot_SSE_v_Iterations(pickle_str, keys):
+def plot_SSE_v_Iterations(pickle_str, val_pickle, keys):
     path_to_pickle = os.path.join(os.getcwd(), '..', 'output', pickle_str)  # path to output
+    val_path = os.path.join(os.getcwd(), '..', 'output', val_pickle)  # path to output
     data = pickle.load(open(path_to_pickle, "rb"))
-
+    val_data = pickle.load(open(val_path, "rb"))
     fig, ax = plt.subplots(1, 1, figsize=(12, 8))
     labels = []
     colors = ['k', 'r', 'b']
 
-    for i in [5, 6]:
-        data_temp = data[keys[i]]
-
+    for i, obj in enumerate([5, 6, 7]):
+        data_temp = data[keys[obj]]
+        val_temp = val_data[keys[obj]]
         SSE = np.array([np.linalg.norm(data_temp['SSE'][k][1]) for k in range(len(data_temp['SSE']))])  # *68.9
+        val_SSE = np.linalg.norm(val_temp)
         iteration = [data_temp['SSE'][k][0] for k in range(len(data_temp['SSE']))]
-
-        if i == 5:
+        if i == 6:
             labels.append(r'$\lambda$= {}'.format(data_temp['lambda_reg']))
 
-        ax.plot(iteration, SSE, color=colors[i-7], marker='.', markevery=0.1)
-
+        ax.plot(iteration, SSE, color=colors[i], marker='.', markevery=0.1)
+        ax.scatter(iteration[-1], val_SSE, color=colors[i])
         ax.grid(which='minor', alpha=0.25, color='k', ls=':')
         ax.grid(which='major', alpha=0.40, color='k', ls='--')
         ax.set_title('Training SSE')
@@ -49,11 +52,6 @@ def plot_SSE_v_Iterations(pickle_str, keys):
 
 
 def view_W_values(pickle_str, keys):
-    """ prints results contained in each trial
-		can be used for part:
-			-1c
-	"""
-
     path_to_pickle = os.path.join(os.getcwd(), '..', 'output', pickle_str)
     data = pickle.load(open(path_to_pickle, "rb"))
     for key in keys:
@@ -88,12 +86,12 @@ def view_training_SSE_results(pickle_str, keys):
     return SSE_ret
 
 
-trials = ['trial_0', 'trial_1', 'trial_2', 'trial_3', 'trial_4', 'trial_5', 'trial_6']
+trials = ['trial_0', 'trial_1', 'trial_2', 'trial_3', 'trial_4', 'trial_5', 'trial_6', 'trial_7']
 
-#plot_SSE_v_Iterations(pickle_str='results_p1.pickle', keys=trials)
-#view_W_values(pickle_str = 'results_p1.pickle', keys=trials)
-#view_validation_results(pickle_str='results_validation_p1.pickle', keys=trials[0])
-view_training_SSE_results(pickle_str='results_p1.pickle', keys=trials[0])
+plot_SSE_v_Iterations(pickle_str='results_p1.pickle', val_pickle='results_validation_p1.pickle', keys=trials)
+# view_W_values(pickle_str = 'results_p1.pickle', keys=trials)
+# view_validation_results(pickle_str='results_validation_p1.pickle', keys=trials[0])
+# view_training_SSE_results(pickle_str='results_p1.pickle', keys=trials[0])
 
 
 plt.show()
