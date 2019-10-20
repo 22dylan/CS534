@@ -57,8 +57,4 @@ def validate_W(part_num):
 
     # print(validation_SSE)
 
-validate_W("p1")
-# validate_W("p2_0to4")
-# validate_W("p2_drs")
-# validate_W("p2_2ndRun")
-# validate_W("p3")
+validate_W("p2")

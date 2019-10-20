@@ -19,7 +19,7 @@ def data_reader(path, norm, normval=None):
               'yr_renovated','zipcode', 'lat','long','sqft_living15','sqft_lot15','price',\
               'year', 'month', 'day']
     num_features=['waterfront','condition','grade']
-    
+
     #normalize data to range of 0 to 
     if norm==True:
         if normval is None:
