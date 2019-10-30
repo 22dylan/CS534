@@ -3,7 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import pickle
 
-p = 0
+p = 1
 # path = os.path.join(os.getcwd(), '..', 'data', 'PA1_train.csv')
 path1 = os.path.join(os.getcwd(), '..', 'data', 'PA1_train.csv')
 path2 = os.path.join(os.getcwd(), '..', 'data', 'PA1_test.csv')
