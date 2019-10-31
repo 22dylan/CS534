@@ -1,15 +1,15 @@
 import numpy as np
 import pandas as pd
 import csv
-from datetime import datetime
 
 pd.set_option('display.max_columns', None)
 
 
 def data_reader(path):
-    df = pd.read_csv(path)
-    df[dummy] = np.ones(len(df.columns))
-    data = df.to_numpy()
+    data = np.genfromtxt(path, delimiter=',')
+    data[data[:, 0] == 3, 0] = 1
+    data[data[:, 0] == 5, 0] = -1
+    data = np.column_stack((data, np.ones(len(data))))
     return data
 
 
