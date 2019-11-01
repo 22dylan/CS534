@@ -8,7 +8,7 @@ pd.set_option('display.max_columns', None)
 
 def data_reader(path):
     df = pd.read_csv(path)
-    df[dummy] = np.ones(len(df.columns))
+    df['dummy'] = np.ones(len(df))
     data = df.to_numpy()
     return data
 

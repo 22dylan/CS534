@@ -1,7 +1,11 @@
 import os
 import numpy as np
+import matplotlib
+matplotlib.use('TkAgg')
+
 import matplotlib.pyplot as plt
 from data_reader import data_reader
+
 
 
 
@@ -71,4 +75,6 @@ ax.plot(iterations, acc_val, color='k', ls='-.', label = 'Validation')
 ax.legend()
 ax.grid(which='minor', alpha=0.25, color = 'k', ls = ':')
 ax.grid(which='major', alpha=0.40, color = 'k', ls = '--')
+ax.set_xlabel('Iteration')
+ax.set_ylabel('Accuracy')
 plt.show()
