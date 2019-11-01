@@ -56,7 +56,7 @@ def kernelPerceptron(data,data_val, p):
             if y[j]*u <= 0:
                 alpha[run][j] = alpha[run][j] + 1
                 err = err + 1
-        acc_train.append(round(1- (err/M),5)) #save number of errors of 
+        acc_train.append(1- (err/M)) #save number of errors of 
 
         #test against validation data
         err2 = 0
@@ -67,7 +67,7 @@ def kernelPerceptron(data,data_val, p):
             
             if y_val[j]*u_val <= 0:
                 err2 = err2 + 1
-        acc_val.append(round(1- (err2/M_val),5))
+        acc_val.append(1- (err2/M_val))
 
     return alpha, acc_train, acc_val
 
@@ -118,10 +118,11 @@ def runPerceptrons():
 
 def plotData():
     #get accuracy
-    path_to_acc_train = os.path.join('..', 'data', 'acc_train_p3.csv')
+    colors = ['b','r','g','m','k']
+    path_to_acc_train = os.path.join('..', 'output', 'acc_train_p3.csv')
     acc_train_all = np.genfromtxt(path_to_acc_train, delimiter =',')
 
-    path_to_acc_val = os.path.join('..', 'data', 'acc_val_p3.csv')
+    path_to_acc_val = os.path.join('..', 'output', 'acc_val_p3.csv')
     acc_val_all = np.genfromtxt(path_to_acc_val, delimiter =',')
 
     iterations = np.linspace(1, 15, 15)
@@ -129,11 +130,11 @@ def plotData():
     fig, ax = plt.subplots(1,1, figsize=(8, 6))
     p = 0
     for acc_train in acc_train_all:
-        ax.plot(iterations, acc_train, color='k', ls='-', label = 'Training, p={0}'.format(p+1))
+        ax.plot(iterations, acc_train, color=colors[p], ls='-', label = 'Training, p={0}'.format(p+1))
         p += 1
     p = 0
     for acc_val in acc_val_all:
-        ax.plot(iterations, acc_val, color='k', ls='-.', label = 'Validation, p={0}'.format(p+1))
+        ax.plot(iterations, acc_val, color=colors[p], ls='-.', label = 'Validation, p={0}'.format(p+1))
         p += 1
 
     ax.legend()
@@ -142,5 +143,5 @@ def plotData():
     plt.show()
 
 
-runPerceptrons()
-# plotData()
+# runPerceptrons()
+plotData()
