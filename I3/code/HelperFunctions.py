@@ -5,106 +5,79 @@ import copy
 def datareader(path_to_data):
 	""" 
 	returns data as a numpy array
-		input: 
-			path_to_data - path to data
-		output: 
-			data - a dictionary of the data. each key in the 
-				dict corresponds to a column heading (e.g. cap-shape_f)
+
+	input: 
+		path_to_data - path to data
+	output: 
+		data - a dictionary of the data. each key in the 
+			dict corresponds to a column heading (e.g. cap-shape_f)
 	"""
 
 	df = pd.read_csv(path_to_data, dtype='float') #you wanted float datatype
-	df.drop(['veil-type_p'], axis=1)
+	df = df.drop(['veil-type_p'], axis=1)
 	# data = df.to_dict(orient='list')
 	# for key in data.keys():
 	# 	data[key] = np.array(data[key])
 
 	return df
 
-# -------------------------- OLD ------------------------------------
-
-# def create_split(data, feature, y):
-# 	"""
-# 		creates a split in the decsion tree as such:
-
-# 				[c_p, c_m]
-# 			  	/		\
-# 		    pl /      pr \
-# 	 	      /           \
-# 		[cl_p, cl_m]  	[cr_p, cr_m]
-
-# 	"""
-
-# 	# splitting data based on passed in feature
-# 	data_t = data.loc[data[feature] == 1]
-# 	data_f = data.loc[data[feature] == 0]
-
-
-# 	# counting number of true/false variables at each node
-# 	c_p = len(data.loc[data[y] == 1])
-# 	c_m = len(data.loc[data[y] == 0])
-# 	cl_p = len(data_t.loc[data[y] == 1])
-# 	cl_m = len(data_t.loc[data[y] == 0])
-# 	cr_p = len(data_f.loc[data[y] == 1])
-# 	cr_m = len(data_f.loc[data[y] == 0])
-# 	if 0 in [cl_p, cl_m, cr_p, cr_m, c_p, c_m]:
-# 		B = -999
-# 		data_t = None
-# 		data_f = None
-# 	else:
-# 		# counting probability of left and right nodes
-# 		pl = (cl_p + cl_m)/(c_p + c_m)
-# 		pr = (cr_p + cr_m)/(c_p + c_m)
-
-# 		# computing gini indicies
-# 		U_al = 1 - (cl_p/(cl_p + cl_m))**2 - (cl_m/(cl_p + cl_m))**2
-# 		U_ar = 1 - (cr_p/(cr_p + cr_m))**2 - (cr_m/(cr_p + cr_m))**2
-# 		U_a = 1 - (c_p/(c_p+c_m))**2 - (c_m/(c_p+c_m))**2				#note: want to confirm this.
-
-# 		# computing benefit
-# 		B = U_a - pl*U_al - pr*U_ar
-
-# 	return data_t, data_f, B
-
-# def find_best_feature(data, features, y):
-# 	"""
-# 	finds the best feature to create a split on 
-# 		based on the benefit of each split
-# 	"""
-# 	features_copy = features.copy()
-# 	sel_feature = features[0]
-# 	sel_B = 0
-# 	for feature in features:
-# 		data_t, data_f, B = create_split(data, feature, y)
-
-# 		if B >= sel_B:
-# 			sel_feature = feature
-# 			sel_B = B
-# 			sel_data_t = data_t
-# 			sel_data_f = data_f
-
-# 	features_copy.remove(sel_feature)
-# 	return sel_data_t, sel_data_f, features_copy, sel_feature
-
-# -------------------------- OLD ------------------------------------
-
-
-
-
 def find_considered_nodes(tree, layer):
-	# first finding all nodes in the specified layer
-	all_nodes = np.array(list(tree.keys()))
-	node_level = np.zeros(len(all_nodes))
-	for i in range(len(all_nodes)):
+	"""
+	finding names of all nodes in the specified layer
+		for example: 
+			-layer=1: consider_nodes = ['1', '0']
+			-layer=2: consider_nodes = ['1-1', '1-0', '0-1', '0-0']
+			-etc.
+	steps:
+		1) finds all possible nodes in the layer
+		2) check that parent node exists in tree
+
+	input:
+		tree:  a dictionary of the tree under consideration
+		layer: the layer to consider
+	output:
+		consider_nodes: a numpy array of the nodes in the layer
+	"""
+	all_nodes = np.array(list(tree.keys()))		# all nodes in tree
+	node_level = np.zeros(len(all_nodes))		# pre-allocating some space
+	for i in range(len(all_nodes)):				# looping through all nodes
+		# figuring out the layer that each node belongs to.
+		#	note that the layer is the same as the length of hte node name 
+		#	e.g. [1-0] is in layer 2, [1-0-0] is in layer 3
 		node_level[i] = np.sum(c.isdigit() for c in all_nodes[i])
 
-	node_level = np.array(node_level)
-	consider_nodes_idx = np.array(node_level==layer)
-	consider_nodes = all_nodes[consider_nodes_idx]	# isolate nodes
+	consider_nodes_idx = np.array(node_level==layer)	# finding index of nodes in layer
+	consider_nodes = all_nodes[consider_nodes_idx]		# isolate those nodes
+
+	# --- check if parent exists in tree --- 
+	if layer > 1:		# assuming that the root exists
+		consider_nodes_copy = np.copy(consider_nodes)		# making a copy to loop through as the original maybe modified
+		for node in consider_nodes_copy:					# looping through nodes in layer
+			parent_node = node.split('-')[:-1]				# finding parent node (e.g. node 1-0-1's parent is node 1-0)
+			parent_node = '-'.join(parent_node)				# 	re-joining after split above
+
+			if parent_node not in all_nodes:				# if the parent node doesn't exist
+				idx = np.argwhere(consider_nodes==node)		# find index in all nodes
+				consider_nodes = np.delete(consider_nodes, idx)	# and delete that bad bessy
+		
 	return consider_nodes
 
-def test_split(tree, feature, consider_nodes, y):
+def split_tree(tree, feature, consider_nodes, y):
 	"""
-		some brief description that makes sense
+		splitting tree based on a given feature.
+
+		steps:
+			1) loop through all nodes in the specified layer
+			2) perform split on data
+			3) calculate necessary values (count of y=1, count of y=0, etc.)
+
+		input: 
+			tree: dictionary of the tree to split
+			feature: feature to perform the split on
+			consider_nodes: numpy array of nodes in the layer to split	
+			y: feature that is being fit to
+		output:
+			tree: an updated tree with the additional split
 	"""
 
 	for node in consider_nodes:			# looping through all nodes in specified layer
@@ -124,11 +97,15 @@ def test_split(tree, feature, consider_nodes, y):
 			"""
 			test_feature_value = int(node[-1])	
 			data_1 = temp_data.loc[temp_data[feature]==test_feature_value]
-
 			c1 = len(data_1.loc[data_1[y]==1])	# counting number of features with y=1
 			c0 = len(data_1.loc[data_1[y]==0])	# 	same for y=0
-			p1 = (c1/(c1+c0))					# probabilty of y=1
-			p0 = (c0/(c1+c0))					# probabilty of y=0
+
+			if (c1==0) and (c0==0):	 		# if there's no features at split
+				p0 = 0
+				p1 = 0
+			else:
+				p1 = (c1/(c1+c0))				# probabilty that y=1
+				p0 = (c0/(c1+c0))				# probabilty that y=0
 
 			# populating tree
 			tree[node]['f=1'] = c1				# count of 1s
@@ -142,43 +119,69 @@ def test_split(tree, feature, consider_nodes, y):
 			
 			# adding a check if the node can be built off of
 			tree[node]['continue'] = True 		# initilizing with true
-			if (p1==1.) or (p0==1.):			# testing of data is already separated completely. 
+			if (p1==0.) or (p0==0.):			# testing of data is already separated completely. 
 				tree[node]['continue'] = False
-		
-		else:
+			
+		else:					# if node can't be built off of, remove from tree
 			tree.pop('{}'.format(node), None)
-
 
 	return tree
 
-def gini_calc(tree, nodes):
+def benefit_calc(tree, nodes, type_split='gini'):
 
-	tot_gini = 0
-	for node in nodes:
-		u = tree[node]['U'] 
-		p = tree[node]['prob']
-		tot_gini += p*u
-	B = tree['root']['U'] - tot_gini
-	return B, tree
+	"""
+	performs benefit of split calculation
 
-def find_best_feature2(tree, layer, features, y):
-	features_copy = features.copy()
+	input: 
+		tree:  dictionary of tree
+		nodes: nodes to calculate benefit on
+		type_split: uncertainty calculation, initialized with gini. 
+	output:
+		B: benefit of split
+	"""
+	if type_split == 'gini':
+		tot_gini = 0
+		for node in nodes:
+			u = tree[node]['U'] 
+			p = tree[node]['prob']
+			tot_gini += p*u
+		B = tree['root']['U'] - tot_gini
+	return B
 
-	consider_nodes = find_considered_nodes(tree, layer)
+def find_best_feature(tree, layer, features, y):
 
-	sel_feature = features[0]
-	sel_B = 0
-	for feature in features:
-		tree_temp = test_split(tree, feature, consider_nodes, y)
-		nodes_temp = find_considered_nodes(tree, layer)
-		B, tree_temp = gini_calc(tree_temp, nodes_temp)
+	"""
+	finds best feature to perform split on for the given layer.
+	input:
+		tree: dictionary of tree
+		layer: layer to consider
+		features: list of features to test on
+		y: feature that is being fit to
+	output:
+		tree_out: dictionary of updated tree
+		features_out: copy of features with the selected feature removed.
+			e.g.
+				features_in = [x1, x2, x3]
+				selected_feature = [x2]
+				features_out = [x1, x3]
+	"""
 
-		if B >= sel_B:
-			sel_feature = feature
-			sel_B = B
-			tree_out = copy.deepcopy(tree_temp)
+	features_out = features.copy()	# copying the features; will be modified in loop
+	tree_out = copy.deepcopy(tree)	# initializing a copy of the tree
+	consider_nodes = find_considered_nodes(tree, layer)	# finding all nodes in the layer
 
-	features_copy.remove(sel_feature)
-	tree = copy.deepcopy(tree_temp)
+	sel_feature = features[0]		# arbitrarily selecting an optimal feature
+	sel_B = 0						# initializing benefit of split to 0
+	for feature in features:		# looping through features to test split on
+		tree_temp = split_tree(tree, feature, consider_nodes, y)	# testing the split on feature
+		nodes_temp = find_considered_nodes(tree, layer)	# getting updated list of nodes in tree (in case a node was removed during split)
+		B = benefit_calc(tree_temp, nodes_temp, 'gini')	# calculating benefit of split
 
-	return tree_out, features_copy
+		if B >= sel_B:				# if the benefit is better than previous best
+			sel_feature = feature 	# update the selected feature to split on
+			sel_B = B 				# update the selected benefit
+			tree_out = copy.deepcopy(tree_temp) 	# copy the tree
+
+	features_out.remove(sel_feature)	# remove the selected feature from the features list
+
+	return tree_out, features_out

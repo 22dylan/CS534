@@ -5,43 +5,42 @@ import pandas as pd
 import itertools
 
 
-# print(list(itertools.product([1,0], repeat=2)))
+# -- all data --- 
+path_to_data = os.path.join(os.getcwd(), '..', 'data', 'pa3_train.csv')
+data0 = HF.datareader(path_to_data)
+features= list(data0.columns[:-1])
+y = data0.columns[-1]
 
-# # -- all data --- 
-# path_to_data = os.path.join(os.getcwd(), '..', 'data', 'pa3_train.csv')
-# data0 = HF.datareader(path_to_data)
-# features= list(data0.columns[:-1])
-# y = data0.columns[-1]
+# # --- manageable test data --- 
+# data0 = np.array([[0,0,0, 1],
+# 				[0,0,1, 0],
+# 				[0,1,0, 0],
+# 				[0,1,1, 1],
+# 				[1,0,0, 0],
+# 				[1,0,1, 0],
+# 				[1,1,0, 1],
+# 				[1,1,1, 1]])
 
-# --- manageable test data --- 
-data0 = np.array([[0,0,0, 1],
-				[0,0,1, 0],
-				[0,1,0, 0],
-				[0,1,1, 1],
-				[1,0,0, 0],
-				[1,0,1, 0],
-				[1,1,0, 1],
-				[1,1,1, 1]])
-
-column_names = ['x1', 'x2', 'x3', 'f']
-data0 = pd.DataFrame(data0)
-data0.columns = column_names
-features = column_names[:-1]
-y = column_names[-1]
+# column_names = ['x1', 'x2', 'x3', 'f']
+# data0 = pd.DataFrame(data0)
+# data0.columns = column_names
+# features = column_names[:-1]
+# y = column_names[-1]
 
 # --- running code ---
 depth = 4
 
-"""  predefining all possible paths 
-	example:
-			  root
-             /    \
-		   1	    0
-	     /   \    /   \
-	    11   10  01    00
-  etc.etc.etc.etc.etc.etc.etc.etc.
-  		    etcetera
-  		      etc.
+"""  
+creating tree by predefining all possible paths 
+	-example of nomenclature:
+				  root
+	             /    \
+			   1	    0
+		     /   \    /   \
+		    11   10  01    00
+	  etc.etc.etc.etc.etc.etc.etc.etc.
+	  		    etcetera
+	  		      etc.
 """
 
 c0 = len(data0.loc[data0[y] == 0])
@@ -69,15 +68,11 @@ for i in range(depth):
 
 for i in range(1,depth+1):
 	if (len(features)) > 0:
-		tree, features = HF.find_best_feature2(tree, layer=i, features=features, y=y)
-
+		tree, features = HF.find_best_feature(tree, layer=i, features=features, y=y)
 
 tree = {i:j for i,j in tree.items() if j != {}}	# removing empty keys
+print(tree.keys())
+print(len(tree.keys()))
 
-
-for key in tree.keys():	# printing all nodes
-	print(key)
-	print(tree[key])
-	print()
 
 
