@@ -75,4 +75,17 @@ print(tree.keys())
 print(len(tree.keys()))
 
 
+"""
+TO-DO: write out the trained tree and splits in a way that will be easy to validate/test model on
 
+node, feature
+----  -------
+root    x2
+1	    x1
+0		x1
+1-1		x5
+1-0		x5
+0-1		x5
+0-0		x5
+etc.
+"""
