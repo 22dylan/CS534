@@ -28,7 +28,6 @@ features = column_names[:-1]
 y = column_names[-1]
 
 
-
 # --- Part 1a ---
 """ create a tree with a maximum depth of 2 """
 depth = 2
@@ -93,32 +92,38 @@ HF.write_out_tree(tree, path_to_outfile)
 
 
 
-# --- part 1b ---
+# # --- part 1b ---
 # path_to_train_data = os.path.join(os.getcwd(), '..', 'data', 'pa3_train.csv')
 # path_to_val_data = os.path.join(os.getcwd(), '..', 'data', 'pa3_val.csv')
 # path_to_tree = os.path.join(os.getcwd(), '..', 'output', 'part1', 'part1a_D2.csv')
 # data = HF.datareader(path_to_train_data)
 
 
-# # --- manageable test data --- 
-# path_to_tree = os.path.join(os.getcwd(), '..', 'output', 'part1', 'TEST_D2.csv')
-# data = np.array([[0,0,0, 1],
-# 				[0,0,1, 0],
-# 				[0,1,0, 0],
-# 				[0,1,1, 1],
-# 				[1,0,0, 0],
-# 				[1,0,1, 0],
-# 				[1,1,0, 1],
-# 				[1,1,1, 1]])
+# --- manageable test data --- 
+path_to_tree = os.path.join(os.getcwd(), '..', 'output', 'part1', 'TEST_D2.csv')
+data = np.array([[0,0,0, 1],
+				[0,0,1, 0],
+				[0,1,0, 0],
+				[0,1,1, 1],
+				[1,0,0, 0],
+				[1,0,1, 0],
+				[1,1,0, 1],
+				[1,1,1, 1]])
 
-# column_names = ['x1', 'x2', 'x3', 'f']
-# data = pd.DataFrame(data)
-# data.columns = column_names
-# features = column_names[:-1]
-# y = column_names[-1]
+column_names = ['x1', 'x2', 'x3', 'f']
+data = pd.DataFrame(data)
+data.columns = column_names
+features = column_names[:-1]
+y = column_names[-1]
 
-# tree = HF.build_tree(path_to_tree, data)
-# print(tree)
+tree = HF.predict_with_tree(path_to_tree, data)
+
+
+for key in tree.keys():
+	print(key)
+	print(tree[key])
+	print()
+
 
 # # --- Part 1c ---
 # """ create a tree with a maximum depth ranging from 1-8 """
@@ -173,5 +178,3 @@ HF.write_out_tree(tree, path_to_outfile)
 
 # 	path_to_outfile = os.path.join(os.getcwd(), '..', 'output', 'part1', 'part1c_D{}.csv' .format(depth))
 # 	HF.write_out_tree(tree, path_to_outfile)
-
-

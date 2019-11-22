@@ -227,7 +227,7 @@ def write_out_tree(tree, path_to_outfile):
 	outdata.to_csv(path_to_outfile, index=False, na_rep="None")
 
 
-def build_tree(path_to_tree_csv, data, y_included=True):
+def predict_with_tree(path_to_tree_csv, data, y=None):
 
 	# --- creating the tree --- 
 	tree_csv = pd.read_csv(path_to_tree_csv)
@@ -243,17 +243,25 @@ def build_tree(path_to_tree_csv, data, y_included=True):
 	# --- running data through tree ---
 	tree['root']['data'] = data
 	for node in tree.keys():
+		data = tree[node]['data']
 		if tree[node]['split_on'] != 'None':
 			if node == 'root':
 				children = ['1', '0']
 			else:
 				children = [node+'-1', node+'-0']
-			# print(node)
-			# print('\t{}' .format(children))
+
 			for child in children:
-				# if child.endswith('0'):
 				split_val = int(child.split('-')[-1])
 				child_data = data.loc[data[tree[node]['split_on']]==split_val]	# where feature is 1
 				tree[child]['data'] = child_data
 
+				
+
 	return tree
+
+
+
+
+
+
+	
