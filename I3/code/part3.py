@@ -23,10 +23,11 @@ def adaboost(data, features, y, L, depth):
     # data['D'] = np.ones(N)/N
 
     for l in range(L):
-        Dl = [] #empty D for D[l+1]
+        # Dl = [] #empty D for D[l+1]
         h = learn(data, features, y, depth) #get model
         error, errlog = calcError(h,data,features,y) #find error of model
         alpha = .5*math.log((1 - error)/error) #calc weight
+        #TODO: what happens if error = 0 or 1?, comments in slides say only if error<0.5
 
         #calculations for D[l+1]
         i = 0 #example index
@@ -67,7 +68,7 @@ def learn(data,features,y,depth):
     # D.append(np.ones(N)/N)
     data['D'] = np.ones(N)/N
 
-    c0 = len(data.loc[data[y] == 0])
+    c0 = len(data.loc[data[y] == -1])
     c1 = len(data.loc[data[y] == 1])
     sumD1 = sum(data.loc[data[y] == 1]['D']) #0
     sumD0 = sum(data.loc[data[y] == -1]['D']) # 0
@@ -129,7 +130,7 @@ def calcError(h,data,features,y):
     errlog = []
     error = 0
 
-    i = 0 #example index
+    # i = 0 #example index
     for index,ex in data.iterrows():
         # print('\n\n')
         # print(ex)
@@ -138,7 +139,7 @@ def calcError(h,data,features,y):
         else:
             errlog.append(1)
             error += ex['D']
-        i += 1
+        # i += 1
     print('Total number of errors: {0}'.format(error))
     return error, errlog
 
@@ -146,7 +147,7 @@ def calcError(h,data,features,y):
 #using a single learned model of adaboost
 #returns 1 if poisonous
 def useModel(h,ex,features):
-    isPoisonous = 0
+    isPoisonous = -1
 
     return isPoisonous
 
@@ -154,7 +155,7 @@ def useModel(h,ex,features):
 #using the adaboost model
 #returns 1 if poisonous
 def toEatOrNotToEat(learners,weight,features):
-    isPoisonous = 0
+    isPoisonous = -1
 
     return isPoisonous
 

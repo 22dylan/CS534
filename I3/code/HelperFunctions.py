@@ -110,14 +110,14 @@ def split_tree(tree, feature, consider_nodes, y, mode='DT'):
 			test_feature_value = int(node[-1])	
 			data_1 = temp_data.loc[temp_data[feature]==test_feature_value]
 			c1 = len(data_1.loc[data_1[y]==1])	# counting number of features with y=1
-			c0 = len(data_1.loc[data_1[y]==0])	# 	same for y=0
+			c0 = len(data_1.loc[data_1[y]==-1])	# 	same for y=0
 
 			if (c1==0) and (c0==0):	 		# if there's no features at split
 				p0 = 0
 				p1 = 0
 			elif mode=='adaboost':
 				sumD1 = (data_1.loc[data_1[y] == 1].sum()['D']) #0
-				sumD0 = (data_1.loc[data_1[y] == 0].sum()['D']) # 0
+				sumD0 = (data_1.loc[data_1[y] == -1].sum()['D']) # 0
 
 				p1 = (sumD1/(sumD1+sumD0))				# probabilty that y=1
 				p0 = (sumD0/(sumD1+sumD0))				# probabilty that y=0
