@@ -15,10 +15,8 @@ def datareader(path_to_data):
 
 	df = pd.read_csv(path_to_data, dtype='float') #you wanted float datatype
 	df = df.drop(['veil-type_p'], axis=1)
-	# data = df.to_dict(orient='list')
-	# for key in data.keys():
-	# 	data[key] = np.array(data[key])
-
+	df = df
+	df['class'].replace(0, -1,inplace=True)
 	return df
 
 def find_considered_nodes(tree, layer):
@@ -242,21 +240,20 @@ def build_tree(path_to_tree_csv, data, y_included=True):
 		tree[node]['p1'] = row['p1']
 		tree[node]['p0'] = row['p0']
 
-
 	# --- running data through tree ---
 	tree['root']['data'] = data
 	for node in tree.keys():
 		if tree[node]['split_on'] != 'None':
-
 			if node == 'root':
 				children = ['1', '0']
 			else:
 				children = [node+'-1', node+'-0']
-
+			# print(node)
+			# print('\t{}' .format(children))
 			for child in children:
-				if child.endswith('0'):
-					split_val = int(child.split('-')[-1])
-					child_data = data.loc[data[tree[node]['split_on']]==split_val]	# where feature is 1
-					tree[child]['data'] = child_data
+				# if child.endswith('0'):
+				split_val = int(child.split('-')[-1])
+				child_data = data.loc[data[tree[node]['split_on']]==split_val]	# where feature is 1
+				tree[child]['data'] = child_data
 
 	return tree
