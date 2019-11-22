@@ -62,6 +62,17 @@ def find_considered_nodes(tree, layer):
 		
 	return consider_nodes
 
+def remove_children_nodes(tree, node):
+	for node_i in tree.keys():
+		split_node = node_i.split('-')
+		len_node = len(node.split('-'))
+		if len(split_node) > len_node:
+			if '-'.join(split_node[0:len_node]) == node:
+				tree.pop('{}'.format(node), None)
+	return tree
+
+
+
 def split_tree(tree, feature, consider_nodes, y):
 	"""
 		splitting tree based on a given feature.
@@ -121,10 +132,10 @@ def split_tree(tree, feature, consider_nodes, y):
 			tree[node]['continue'] = True 		# initilizing with true
 			if (p1==0.) or (p0==0.):			# testing of data is already separated completely. 
 				tree[node]['continue'] = False
-			
+		
 		else:					# if node can't be built off of, remove from tree
 			tree.pop('{}'.format(node), None)
-
+			# tree = remove_children_nodes(tree, node)	# note: drs, stopping here
 	return tree
 
 def benefit_calc(tree, nodes, type_split='gini'):
@@ -185,3 +196,18 @@ def find_best_feature(tree, layer, features, y):
 	features_out.remove(sel_feature)	# remove the selected feature from the features list
 
 	return tree_out, features_out
+
+
+def write_out_tree(tree, path_to_outfile):
+	# writing out tree
+	node = []
+	split = []
+	for key in tree.keys():
+		node.append(key)
+		split.append(tree[key]['split_on'])
+
+	outdata = pd.DataFrame(
+	    {'node': node,
+	     'split': split
+	    })
+	outdata.to_csv(path_to_outfile, index=False, na_rep="None")
