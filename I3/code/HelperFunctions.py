@@ -15,10 +15,8 @@ def datareader(path_to_data):
 
 	df = pd.read_csv(path_to_data, dtype='float') #you wanted float datatype
 	df = df.drop(['veil-type_p'], axis=1)
-	# data = df.to_dict(orient='list')
-	# for key in data.keys():
-	# 	data[key] = np.array(data[key])
-
+	df = df
+	df['class'].replace(0, -1,inplace=True)
 	return df
 
 def find_considered_nodes(tree, layer):
@@ -117,22 +115,10 @@ def split_tree(tree, feature, consider_nodes, y, mode='DT'):
 			if (c1==0) and (c0==0):	 		# if there's no features at split
 				p0 = 0
 				p1 = 0
-
 			elif mode=='adaboost':
-				# sumD1 = 0
-				# sumD0 = 0
-				# for i in range(len(data_1)):
-				# 	if data_1[i][y] == 1:
-				# 		sumD1 += data_1[i]['D']
-				# 	else:
-				# 		sumD0 += data_1[i]['D']
-				# print(data_1.loc[data_1[y] == 1]['D'])
 				sumD1 = (data_1.loc[data_1[y] == 1].sum()['D']) #0
 				sumD0 = (data_1.loc[data_1[y] == 0].sum()['D']) # 0
-				# print('sumD1')
-				# print(sumD1)
-				# print('sumD0')
-				# print(sumD0)
+
 				p1 = (sumD1/(sumD1+sumD0))				# probabilty that y=1
 				p0 = (sumD0/(sumD1+sumD0))				# probabilty that y=0
 
@@ -248,7 +234,7 @@ def write_out_tree(tree, path_to_outfile):
 	outdata.to_csv(path_to_outfile, index=False, na_rep="None")
 
 
-def build_tree(path_to_tree_csv, data, y_included=True):
+def predict_with_tree(path_to_tree_csv, data, y=None):
 
 	# --- creating the tree --- 
 	tree_csv = pd.read_csv(path_to_tree_csv)
@@ -261,21 +247,28 @@ def build_tree(path_to_tree_csv, data, y_included=True):
 		tree[node]['p1'] = row['p1']
 		tree[node]['p0'] = row['p0']
 
-
 	# --- running data through tree ---
 	tree['root']['data'] = data
 	for node in tree.keys():
+		data = tree[node]['data']
 		if tree[node]['split_on'] != 'None':
-
 			if node == 'root':
 				children = ['1', '0']
 			else:
 				children = [node+'-1', node+'-0']
 
 			for child in children:
-				if child.endswith('0'):
-					split_val = int(child.split('-')[-1])
-					child_data = data.loc[data[tree[node]['split_on']]==split_val]	# where feature is 1
-					tree[child]['data'] = child_data
+				split_val = int(child.split('-')[-1])
+				child_data = data.loc[data[tree[node]['split_on']]==split_val]	# where feature is 1
+				tree[child]['data'] = child_data
+
+				
 
 	return tree
+
+
+
+
+
+
+	
