@@ -42,7 +42,7 @@ def find_considered_nodes(tree, layer):
 	node_level = np.zeros(len(all_nodes))		# pre-allocating some space
 	for i in range(len(all_nodes)):				# looping through all nodes
 		# figuring out the layer that each node belongs to.
-		#	note that the layer is the same as the length of hte node name 
+		#	the layer number is the same as the length of the node name 
 		#	e.g. [1-0] is in layer 2, [1-0-0] is in layer 3
 		node_level[i] = np.sum(c.isdigit() for c in all_nodes[i])
 
@@ -63,13 +63,16 @@ def find_considered_nodes(tree, layer):
 	return consider_nodes
 
 def remove_children_nodes(tree, node):
+	children_remove = []
 	for node_i in tree.keys():
 		split_node = node_i.split('-')
 		len_node = len(node.split('-'))
 		if len(split_node) > len_node:
 			if '-'.join(split_node[0:len_node]) == node:
-				tree.pop('{}'.format(node), None)
-	return tree
+				children_remove.append(node_i)
+				# tree.pop('{}'.format(node_i), None)
+
+	return children_remove
 
 
 
@@ -90,7 +93,7 @@ def split_tree(tree, feature, consider_nodes, y):
 		output:
 			tree: an updated tree with the additional split
 	"""
-
+	children_to_remove = []
 	for node in consider_nodes:			# looping through all nodes in specified layer
 		if len(node.split('-')) == 1:	# if the first layer, use the root data
 			parent_node = 'root'
@@ -126,16 +129,21 @@ def split_tree(tree, feature, consider_nodes, y):
 			tree[node]['p1'] = p1				# prob of y=1
 			tree[node]['p0'] = p0				# prob of y=0
 			tree[node]['U'] = 1 - p1**2 - p0**2	# calculating U(node)
-			tree[node]['split_on'] = feature 	# feature that the data was split on
+			tree[parent_node]['split_on'] = feature 	# feature that the data was split on
 			
 			# adding a check if the node can be built off of
 			tree[node]['continue'] = True 		# initilizing with true
 			if (p1==0.) or (p0==0.):			# testing of data is already separated completely. 
 				tree[node]['continue'] = False
-		
-		else:					# if node can't be built off of, remove from tree
+
+		else:					# if node can't be built off of, remove node (and children) from tree
 			tree.pop('{}'.format(node), None)
-			# tree = remove_children_nodes(tree, node)	# note: drs, stopping here
+			children_to_remove.append(remove_children_nodes(tree, node))	# returning list of children to remove
+
+	children_to_remove = [item for sublist in children_to_remove for item in sublist]	# removing the children specified above
+	for node in children_to_remove:
+		tree.pop('{}'.format(node))
+
 	return tree
 
 def benefit_calc(tree, nodes, type_split='gini'):
@@ -156,7 +164,7 @@ def benefit_calc(tree, nodes, type_split='gini'):
 			u = tree[node]['U'] 
 			p = tree[node]['prob']
 			tot_gini += p*u
-		B = tree['root']['U'] - tot_gini
+		B = tree['root']['U'] - tot_gini		# note: want to confirm this.
 	return B
 
 def find_best_feature(tree, layer, features, y):
@@ -202,12 +210,53 @@ def write_out_tree(tree, path_to_outfile):
 	# writing out tree
 	node = []
 	split = []
+	p1 = []
+	p0 = []
+
 	for key in tree.keys():
 		node.append(key)
 		split.append(tree[key]['split_on'])
+		p1.append(tree[key]['p1'])
+		p0.append(tree[key]['p0'])
 
 	outdata = pd.DataFrame(
 	    {'node': node,
-	     'split': split
+	     'split': split,
+	     'p1': p1,
+	     'p0': p0
 	    })
+
 	outdata.to_csv(path_to_outfile, index=False, na_rep="None")
+
+
+def build_tree(path_to_tree_csv, data, y_included=True):
+
+	# --- creating the tree --- 
+	tree_csv = pd.read_csv(path_to_tree_csv)
+	tree = {}
+	# for node in tree_csv['node']:
+	for index, row in tree_csv.iterrows():
+		node = row['node']
+		tree[node] = {}
+		tree[node]['split_on'] = row['split']
+		tree[node]['p1'] = row['p1']
+		tree[node]['p0'] = row['p0']
+
+
+	# --- running data through tree ---
+	tree['root']['data'] = data
+	for node in tree.keys():
+		if tree[node]['split_on'] != 'None':
+
+			if node == 'root':
+				children = ['1', '0']
+			else:
+				children = [node+'-1', node+'-0']
+
+			for child in children:
+				if child.endswith('0'):
+					split_val = int(child.split('-')[-1])
+					child_data = data.loc[data[tree[node]['split_on']]==split_val]	# where feature is 1
+					tree[child]['data'] = child_data
+
+	return tree
