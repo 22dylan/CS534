@@ -1,31 +1,32 @@
 import os 
 import numpy as np
-import HelperFunctions as HF
+import HelperFunctions_drs as HF
 import pandas as pd
 import itertools
 
 
-# # -- all data --- 
-# path_to_data = os.path.join(os.getcwd(), '..', 'data', 'pa3_train.csv')
-# data = HF.datareader(path_to_data)
-# features= list(data.columns[:-1])
-# y = data.columns[-1]
+# -- all data --- 
+path_to_data = os.path.join(os.getcwd(), '..', 'data', 'pa3_train.csv')
+data = HF.datareader(path_to_data)
+features= list(data.columns[:-1])
+y = data.columns[-1]
 
-# --- manageable test data --- 
-data = np.array([[0,0,0, 1],
-				[0,0,1, 0],
-				[0,1,0, 0],
-				[0,1,1, 1],
-				[1,0,0, 0],
-				[1,0,1, 0],
-				[1,1,0, 1],
-				[1,1,1, 1]])
+# # --- manageable test data --- 
+# data = np.array([[0,0,0, 1],
+# 				[0,0,1, 0],
+# 				[0,1,0, 0],
+# 				[0,1,1, 1],
+# 				[1,0,0, 0],
+# 				[1,0,1, 0],
+# 				[1,1,0, 1],
+# 				[1,1,1, 1]])
 
-column_names = ['x1', 'x2', 'x3', 'f']
-data = pd.DataFrame(data)
-data.columns = column_names
-features = column_names[:-1]
-y = column_names[-1]
+# column_names = ['x1', 'x2', 'x3', 'f']
+# data = pd.DataFrame(data)
+# data.columns = column_names
+# features = column_names[:-1]
+# y = column_names[-1]
+
 
 
 # --- Part 1a ---
@@ -44,7 +45,7 @@ creating tree by predefining all possible paths
 	  		    etcetera
 	  		      etc.
 """
-c0 = len(data.loc[data[y] == 0])
+c0 = len(data.loc[data[y] == -1])
 c1 = len(data.loc[data[y] == 1])
 p1 = (c1/(c1+c0))				# probabilty that y=1
 p0 = (c0/(c1+c0))				# probabilty that y=0
@@ -55,12 +56,12 @@ tree['root']['data'] = data
 tree['root']['f=0'] = c0
 tree['root']['f=1'] = c1
 tree['root']['prob'] = 1
-tree['root']['U'] = 1 - (c1/(c1+c0))**2 - (c0/(c1+c0))**2				#note: want to confirm this.
+tree['root']['U'] = 1 - p1**2 - p0**2				#note: want to confirm this.
 tree['root']['continue'] = True
-tree['root']['split_on'] = None
+tree['root']['split_on'] = []
 tree['root']['p1'] = p1
 tree['root']['p0'] = p0
-
+tree['root']['feature_path'] = []
 
 for i in range(depth):
 	temp = list(itertools.product([1,0], repeat=i+1))
@@ -76,19 +77,29 @@ for i in range(depth):
 		tree[ii]['f=1'] = None
 		tree[ii]['prob'] = None
 		tree[ii]['U'] = None
-		tree[ii]['continue'] = None
+		tree[ii]['continue'] = True
 		tree[ii]['split_on'] = None
 		tree[ii]['p1'] = None
 		tree[ii]['p0'] = None
+		tree[ii]['feature_path'] = []
 
-for i in range(1,depth+1):
-	if (len(features)) > 0:
-		tree, features = HF.find_best_feature(tree, layer=i, features=features, y=y)
 
-tree = {i:j for i,j in tree.items() if j != {}}	# removing empty keys
 
-path_to_outfile = os.path.join(os.getcwd(), '..', 'output', 'part1', 'TEST_D{}.csv' .format(depth))
-HF.write_out_tree(tree, path_to_outfile)
+tree = HF.build_tree(tree, features, y)
+
+for key in tree.keys():
+	print(key)
+	print(tree[key])
+	print()
+
+# for i in range(1,depth+1):
+# 	if (len(features)) > 0:
+# 		tree, features = HF.find_best_feature(tree, layer=i, features=features, y=y)
+
+# tree = {i:j for i,j in tree.items() if j != {}}	# removing empty keys
+
+# path_to_outfile = os.path.join(os.getcwd(), '..', 'output', 'part1', 'TEST_D{}.csv' .format(depth))
+# HF.write_out_tree(tree, path_to_outfile)
 
 
 

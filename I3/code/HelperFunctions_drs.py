@@ -15,7 +15,6 @@ def datareader(path_to_data):
 
 	df = pd.read_csv(path_to_data, dtype='float') #you wanted float datatype
 	df = df.drop(['veil-type_p'], axis=1)
-	df = df
 	df['class'].replace(0, -1,inplace=True)
 	return df
 
@@ -73,7 +72,7 @@ def remove_children_nodes(tree, node):
 	return children_remove
 
 
-def split_tree(tree, feature, consider_nodes, y):
+def split_tree(tree, node, features, y):
 	"""
 		splitting tree based on a given feature.
 
@@ -90,58 +89,130 @@ def split_tree(tree, feature, consider_nodes, y):
 		output:
 			tree: an updated tree with the additional split
 	"""
-	children_to_remove = []
-	for node in consider_nodes:			# looping through all nodes in specified layer
-		if len(node.split('-')) == 1:	# if the first layer, use the root data
-			parent_node = 'root'
-		else:							# otherwise, use the data stored in the parent node 
-			parent_node = node.split('-')[:-1]	# (e.g. node 1-0-1 uses data in node 1-0)
-			parent_node = '-'.join(parent_node)
 
-		if tree[parent_node]['continue'] == True:	# if node can be built off of
-			temp_data = tree[parent_node]['data']	# gettting data from the parent node
+	if tree[node]['continue'] == True:
+
+
+		if node == 'root':
+			children = ['1', '0']
+		else:
+			children = [node+'-1', node+'-0']
+
+		sel_B = 0
+		for feature in features:
+			if feature not in tree[node]['feature_path']:
+				temp_data = tree[node]['data']
+				data_1 = temp_data.loc[temp_data[feature]==1]
+				data_0 = temp_data.loc[temp_data[feature]==0]
+
+				c1_1 = len(data_1.loc[data_1[y]==1])	# counting number of features with y=1
+				c1_0 = len(data_1.loc[data_1[y]==-1])	# 	same for y=0
+
+				c0_1 = len(data_0.loc[data_0[y]==1])	# counting number of features with y=1
+				c0_0 = len(data_0.loc[data_0[y]==-1])	# 	same for y=0
+
+				p1 = len(data_1)/len(temp_data)
+				p0 = len(data_0)/len(temp_data)
+
+				if (c1_1 == 0) and (c1_0 == 0):
+					p1_1 = 0
+					p1_0 = 0
+				else:
+					p1_1 = (c1_1/(c1_1+c1_0))				# probabilty that y=1
+					p1_0 = (c1_0/(c1_1+c1_0))				# probabilty that y=0
+
+				if (c0_1 == 0) and (c0_0 == 0):
+					p0_1 = 0
+					p0_0 = 0
+				else:
+					p0_1 = (c0_1/(c0_1+c0_0))				# probabilty that y=1
+					p0_0 = (c0_0/(c0_1+c0_0))				# probabilty that y=0
+
+				U_1 = 1 - (p1_1**2) - (p1_0**2)
+				U_0 = 1 - (p0_1**2) - (p0_0**2)
+				B = tree[node]['U'] - p1*U_1 - p0*U_0
+				if B > sel_B:
+
+					sel_B = B
+					tree[children[0]]['f=1'] = c1_1				# count of 1s
+					tree[children[0]]['f=0'] = c1_0				# count of 0s
+					tree[children[0]]['data'] = data_1			# data
+					tree[children[0]]['prob'] = p1	 			# prob. of being on this particular node
+					tree[children[0]]['p1'] = p1_1				# prob of y=1
+					tree[children[0]]['p0'] = p1_0				# prob of y=0
+					tree[children[0]]['U'] = U_1				# Uncertainty
+					if len(tree[children[0]]['feature_path']) > 1:
+						tree[children[0]]['feature_path'][-1] = feature 	# feature that the data was split on
+					else:
+						tree[children[0]]['feature_path'].append(feature)
+
+					tree[children[1]]['f=1'] = c0_1				# count of 1s
+					tree[children[1]]['f=0'] = c0_0				# count of 0s
+					tree[children[1]]['data'] = data_0			# data
+					tree[children[1]]['prob'] = p0	 			# prob. of being on this particular node
+					tree[children[1]]['p1'] = p0_1				# prob of y=1
+					tree[children[1]]['p0'] = p0_0				# prob of y=0
+					tree[children[1]]['U'] = U_0				# Uncertainty
+					if len(tree[children[1]]['feature_path']) > 1:
+						tree[children[1]]['feature_path'][-1] = feature 	# feature that the data was split on
+					else:
+						tree[children[1]]['feature_path'].append(feature)
+
+					if (c1_1 == 0) or (c1_0 == 0):
+						print(node)
+						print(feature)
+						tree[children[0]]['continue'] = False
+					if (c0_1 == 0) or (c0_0 == 0):
+						tree[children[1]]['continue'] = False
+
+
+			# # _______________________________________________________________________________
+			# if tree[parent_node]['continue'] == True:	# if node can be built off of
+			# 	temp_data = tree[parent_node]['data']	# gettting data from the parent node
+				
+			# """ isolating which value to test on 
+			# 	e.g. if at node 1-0-1 and testing on feature 'x1', 
+			# 		test_feature_value isolates all data points in 
+			# 		temp_data where x1 = 1 (last value in 1-0-1)
+			# """
+
+			# test_feature_value = int(node[-1])	
+			# data_1 = temp_data.loc[temp_data[feature]==test_feature_value]
+			# c1 = len(data_1.loc[data_1[y]==1])	# counting number of features with y=1
+			# c0 = len(data_1.loc[data_1[y]==0])	# 	same for y=0
+
+			# if (c1==0) and (c0==0):	 		# if there's no features at split
+			# 	p0 = 0
+			# 	p1 = 0
+			# else:
+			# 	p1 = (c1/(c1+c0))				# probabilty that y=1
+			# 	p0 = (c0/(c1+c0))				# probabilty that y=0
+
+			# # populating tree
+			# tree[node]['f=1'] = c1				# count of 1s
+			# tree[node]['f=0'] = c0				# count of 0s
+			# tree[node]['data'] = data_1			# storing data
+			# tree[node]['prob'] = len(data_1)/len(tree['root']['data'])	# storing prob. of being on this particular node
+			# tree[node]['p1'] = p1				# prob of y=1
+			# tree[node]['p0'] = p0				# prob of y=0
+			# tree[node]['U'] = 1 - p1**2 - p0**2	# calculating U(node)
+			# tree[parent_node]['split_on'].append(feature) 	# feature that the data was split on
 			
-			""" isolating which value to test on 
-				e.g. if at node 1-0-1 and testing on feature 'x1', 
-					test_feature_value isolates all data points in 
-					temp_data where x1 = 1 (last value in 1-0-1)
-			"""
-			test_feature_value = int(node[-1])	
-			data_1 = temp_data.loc[temp_data[feature]==test_feature_value]
-			c1 = len(data_1.loc[data_1[y]==1])	# counting number of features with y=1
-			c0 = len(data_1.loc[data_1[y]==0])	# 	same for y=0
+		# 		# adding a check if the node can be built off of
+		# 		tree[node]['continue'] = True 		# initilizing with true
+		# 		if (p1==0.) or (p0==0.):			# testing of data is already separated completely. 
+		# 			tree[node]['continue'] = False
 
-			if (c1==0) and (c0==0):	 		# if there's no features at split
-				p0 = 0
-				p1 = 0
-			else:
-				p1 = (c1/(c1+c0))				# probabilty that y=1
-				p0 = (c0/(c1+c0))				# probabilty that y=0
+		# 	else:					# if node can't be built off of, remove node (and children) from tree
+		# 		tree.pop('{}'.format(node), None)
+		# 		children_to_remove.append(remove_children_nodes(tree, node))	# returning list of children to remove
 
-			# populating tree
-			tree[node]['f=1'] = c1				# count of 1s
-			tree[node]['f=0'] = c0				# count of 0s
-			tree[node]['data'] = data_1			# storing data
-			tree[node]['prob'] = len(data_1)/len(tree['root']['data'])	# storing prob. of being on this particular node
-			tree[node]['p1'] = p1				# prob of y=1
-			tree[node]['p0'] = p0				# prob of y=0
-			tree[node]['U'] = 1 - p1**2 - p0**2	# calculating U(node)
-			tree[parent_node]['split_on'] = feature 	# feature that the data was split on
-			
-			# adding a check if the node can be built off of
-			tree[node]['continue'] = True 		# initilizing with true
-			if (p1==0.) or (p0==0.):			# testing of data is already separated completely. 
-				tree[node]['continue'] = False
-
-		else:					# if node can't be built off of, remove node (and children) from tree
-			tree.pop('{}'.format(node), None)
-			children_to_remove.append(remove_children_nodes(tree, node))	# returning list of children to remove
-
-	children_to_remove = [item for sublist in children_to_remove for item in sublist]	# removing the children specified above
-	for node in children_to_remove:
-		tree.pop('{}'.format(node))
+		# children_to_remove = [item for sublist in children_to_remove for item in sublist]	# removing the children specified above
+		# for node in children_to_remove:
+		# 	tree.pop('{}'.format(node))
 
 	return tree
+
 
 def benefit_calc(tree, nodes, type_split='gini'):
 
@@ -163,6 +234,14 @@ def benefit_calc(tree, nodes, type_split='gini'):
 			tot_gini += p*u
 		B = tree['root']['U'] - tot_gini		# note: want to confirm this.
 	return B
+
+def build_tree(tree, features, y):
+	tree_out = copy.deepcopy(tree)
+	
+	for node in tree.keys():
+		tree = split_tree(tree, node, features, y)
+	return tree
+
 
 def find_best_feature(tree, layer, features, y):
 	"""
