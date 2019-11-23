@@ -73,7 +73,8 @@ def remove_children_nodes(tree, node):
 	return children_remove
 
 
-def split_tree(tree, feature, consider_nodes, y):
+
+def split_tree(tree, feature, consider_nodes, y, mode='DT'):
 	"""
 		splitting tree based on a given feature.
 
@@ -109,11 +110,18 @@ def split_tree(tree, feature, consider_nodes, y):
 			test_feature_value = int(node[-1])	
 			data_1 = temp_data.loc[temp_data[feature]==test_feature_value]
 			c1 = len(data_1.loc[data_1[y]==1])	# counting number of features with y=1
-			c0 = len(data_1.loc[data_1[y]==0])	# 	same for y=0
+			c0 = len(data_1.loc[data_1[y]==-1])	# 	same for y=0
 
 			if (c1==0) and (c0==0):	 		# if there's no features at split
 				p0 = 0
 				p1 = 0
+			elif mode=='adaboost':
+				sumD1 = (data_1.loc[data_1[y] == 1].sum()['D']) #0
+				sumD0 = (data_1.loc[data_1[y] == -1].sum()['D']) # 0
+
+				p1 = (sumD1/(sumD1+sumD0))				# probabilty that y=1
+				p0 = (sumD0/(sumD1+sumD0))				# probabilty that y=0
+
 			else:
 				p1 = (c1/(c1+c0))				# probabilty that y=1
 				p0 = (c0/(c1+c0))				# probabilty that y=0
@@ -164,7 +172,8 @@ def benefit_calc(tree, nodes, type_split='gini'):
 		B = tree['root']['U'] - tot_gini		# note: want to confirm this.
 	return B
 
-def find_best_feature(tree, layer, features, y):
+def find_best_feature(tree, layer, features, y, mode='DT'):
+
 	"""
 	finds best feature to perform split on for the given layer.
 	input:
@@ -180,6 +189,7 @@ def find_best_feature(tree, layer, features, y):
 				selected_feature = [x2]
 				features_out = [x1, x3]
 	"""
+
 	features_out = features.copy()	# copying the features; will be modified in loop
 	tree_out = copy.deepcopy(tree)	# initializing a copy of the tree
 	consider_nodes = find_considered_nodes(tree, layer)	# finding all nodes in the layer
@@ -187,7 +197,7 @@ def find_best_feature(tree, layer, features, y):
 	sel_feature = features[0]		# arbitrarily selecting an optimal feature
 	sel_B = 0						# initializing benefit of split to 0
 	for feature in features:		# looping through features to test split on
-		tree_temp = split_tree(tree, feature, consider_nodes, y)	# testing the split on feature
+		tree_temp = split_tree(tree, feature, consider_nodes, y, mode=mode)	# testing the split on feature
 		nodes_temp = find_considered_nodes(tree, layer)	# getting updated list of nodes in tree (in case a node was removed during split)
 		B = benefit_calc(tree_temp, nodes_temp, 'gini')	# calculating benefit of split
 
@@ -252,13 +262,36 @@ def predict_with_tree(path_to_tree_csv, data, y=None):
 				child_data = data.loc[data[tree[node]['split_on']]==split_val]	# where feature is 1
 				tree[child]['data'] = child_data
 
-
+				
 
 	return tree
 
+#using a single learned tree
+#returns 1 if poisonous
+def useTree(tree,ex):
+    #start with root
+    node = 'root'
+    feat = tree[node]['split_on'] #what feature to split on
+    node = str(int(ex[feat]))
+    # print('feat: {}, node: {}'.format(feat, node))
+    # print(tree.keys())
+    if tree[node]['split_on'] is None:
+        if tree[node]['p1'] >= tree[node]['p0']:
+            return 1
+        else:
+            return -1
 
-
-
-
-
+    #loop until done
+    while(True):
+        feat = tree[node]['split_on']
+        # print('feat: {}'.format(feat))
+        newNode = node + '-' + str(int(ex[feat])) #set next node
+        #check if newNode exists
+        # if newNode not in tree.keys():
+        if tree[node]['split_on'] is None:
+            if tree[node]['p1'] >= tree[node]['p0']:
+                return 1
+            else:
+                return -1
+        node = newNode
 
