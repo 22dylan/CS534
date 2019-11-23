@@ -264,24 +264,79 @@ def write_out_tree(tree, path_to_outfile):
     split = []
     p1 = []
     p0 = []
+    feature_path = []
 
     for key in tree.keys():
-        node.append(key)
+        if key == 'root':
+            path = None
+        elif (key == '1') or (key == '0'):
+            path = tree['root']['feature_path']
+        else:
+            parent = key.split('-')[0:len(key.split('-'))-1]
+            parent = '-'.join(parent)
+            path = tree[parent]['feature_path']
+
         if len(tree[key]['feature_path']) >= 1:
             split.append(tree[key]['feature_path'][-1])
         else:
             split.append(None)
+        
+        node.append(key)
         p1.append(tree[key]['p1'])
         p0.append(tree[key]['p0'])
+        feature_path.append(path)
+
 
     outdata = pd.DataFrame(
         {'node': node,
          'split': split,
          'p1': p1,
-         'p0': p0
+         'p0': p0, 
+         'feature_path': feature_path
         })
 
     outdata.to_csv(path_to_outfile, index=False, na_rep="None")
+
+def build_tree_from_csv(path_to_csv, data, y=None):
+    # --- creating the tree ---
+    tree_csv = pd.read_csv(path_to_csv)
+    tree = {}
+    for index, row in tree_csv.iterrows():
+        node = row['node']
+        tree[node] = {}
+        tree[node]['split_on'] = row['split']
+        tree[node]['p1'] = row['p1']
+        tree[node]['p0'] = row['p0']
+
+    # --- running data through tree ---
+    tree['root']['data'] = data
+    for node in tree.keys():
+        data = tree[node]['data']
+        if tree[node]['split_on'] != 'None':
+            if node == 'root':
+                children = ['1', '0']
+            else:
+                children = [node+'-1', node+'-0']
+            for child in children:
+                split_val = int(child.split('-')[-1])
+                child_data = data.loc[data[tree[node]['split_on']]==split_val]  # where feature is 1
+                tree[child]['data'] = child_data
+    return tree
+
+def calc_accuracy(path_to_csv, data, y):
+    # tree_csv = pd.read_csv(path_to_csv)
+    tree = build_tree_from_csv(path_to_csv, data)
+    for index,ex in data.iterrows():
+        # print('\n\n')
+        # print(ex[y])
+        print(ex)
+        if (useTree(tree,ex) == ex[y]):
+            errlog.append(0) 
+        else:
+            errlog.append(1)
+            error += ex['D']
+        # i += 1
+    return error
 
 #using a single learned tree
 #returns 1 if poisonous
@@ -311,8 +366,5 @@ def useTree(tree,ex):
             else:
                 return -1
         node = newNode
-
-
-
 
 
