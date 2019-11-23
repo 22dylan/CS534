@@ -119,6 +119,7 @@ def split_tree(tree, node, features, y, depth, mode='DT'):
                     
                     if (c1_1 == 0) or (c1_0 == 0):
                         continue_tf_1 = False
+                        # tree[children[0]]['split_on'] == None
 
                     if (c0_1 == 0) or (c0_0 == 0):
                         continue_tf_0 = False
@@ -136,6 +137,7 @@ def split_tree(tree, node, features, y, depth, mode='DT'):
             tree[node]['feature_path'] = tree[parent_node]['feature_path'][:]
             tree[node]['feature_path'].append(sel_feature)
             tree[node]['split_on'] = sel_feature
+
 
     return tree, continue_tf_1, continue_tf_0
 
@@ -204,7 +206,7 @@ def build_empty_tree(data, features, y, depth, mode):
     tree['root']['f=0'] = c0
     tree['root']['f=1'] = c1
     tree['root']['prob'] = 1
-    tree['root']['U'] = 1 - p1**2 - p0**2               #note: want to confirm this.
+    tree['root']['U'] = 1 - p1**2 - p0**2
     tree['root']['continue'] = True
     tree['root']['split_on'] = None
     tree['root']['p1'] = p1
@@ -277,7 +279,10 @@ def write_out_tree(tree, path_to_outfile):
             path = tree[parent]['feature_path']
 
         if len(tree[key]['feature_path']) >= 1:
-            split.append(tree[key]['feature_path'][-1])
+            if (tree[key]['p1'] != 0) and (tree[key]['p0']!=0):
+                split.append(tree[key]['feature_path'][-1])
+            else:
+                split.append(None)
         else:
             split.append(None)
         
@@ -364,13 +369,13 @@ def useTree(tree,ex):
         feat = tree[node]['split_on']
         #check if newNode exists
         # if newNode not in tree.keys():
+        #     pass
         if (tree[node]['split_on'] is None) or (tree[node]['split_on'] == "None"):
             if tree[node]['p1'] >= tree[node]['p0']:
                 return 1
             else:
                 return -1
         newNode = node + '-' + str(int(ex[feat])) #set next node
-
         node = newNode
 
 
