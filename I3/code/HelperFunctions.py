@@ -123,7 +123,7 @@ def split_tree(tree, node, features, y, depth, mode='DT'):
 
                     if (c0_1 == 0) or (c0_0 == 0):
                         continue_tf_0 = False
-
+                        
         if node == 'root':
             tree[node]['feature_path'].append(sel_feature)
             tree[node]['split_on'] = sel_feature
@@ -137,7 +137,6 @@ def split_tree(tree, node, features, y, depth, mode='DT'):
             tree[node]['feature_path'] = tree[parent_node]['feature_path'][:]
             tree[node]['feature_path'].append(sel_feature)
             tree[node]['split_on'] = sel_feature
-
 
     return tree, continue_tf_1, continue_tf_0
 
