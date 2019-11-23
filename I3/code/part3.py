@@ -59,77 +59,6 @@ def adaboost(data, features, y, L, depth):
     return H, Alpha
 
 
-# #weak learner (DT with depth and weighted examples)
-# def learn(data,features,y,depth):
-#     # h = []
-
-#     # N = len(data) # number of examples
-#     # # print('# of examples: {0}'.format(N))
-
-#     # #initialize weights D, with uniform distribution initially
-#     # # D = [] #weights for each example, for each learner
-#     # # D.append(np.ones(N)/N)
-#     # data['D'] = np.ones(N)/N
-
-#     c0 = len(data.loc[data[y] == -1])
-#     c1 = len(data.loc[data[y] == 1])
-#     sumD1 = sum(data.loc[data[y] == 1]['D']) #0
-#     sumD0 = sum(data.loc[data[y] == -1]['D']) # 0
-#     # for i in range(len(data)):
-#     #     if data[i][y] == 1:
-#     #         sumD1 += data[i]['D']
-#     #     else:
-#     #         sumD0 += data[i]['D']
-    
-
-#     p1 = (sumD1/(sumD1+sumD0))				# probabilty that y=1
-#     p0 = (sumD0/(sumD1+sumD0))				# probabilty that y=0
-
-#     tree = {}
-#     tree['root'] = {}
-#     tree['root']['data'] = data
-#     tree['root']['f=0'] = c0
-#     tree['root']['f=1'] = c1
-#     tree['root']['prob'] = 1
-#     tree['root']['U'] = 1 - p1**2 - p0**2				#note: want to confirm this.
-#     tree['root']['continue'] = True
-#     tree['root']['split_on'] = None
-#     tree['root']['p1'] = p1
-#     tree['root']['p0'] = p0
-
-
-#     for i in range(depth):
-#         temp = list(itertools.product([1,0], repeat=i+1))
-
-#         if len(temp[0]) == 1:
-#             temp = [str(i[0]) for i in temp]
-#         else:
-#             temp = ['-'.join(map(str, i)) for i in temp]
-#         for ii in temp:
-#             tree[ii] = {}
-#             tree[ii]['data'] = None
-#             tree[ii]['f=0'] = None
-#             tree[ii]['f=1'] = None
-#             tree[ii]['prob'] = None
-#             tree[ii]['U'] = None
-#             tree[ii]['continue'] = None
-#             tree[ii]['split_on'] = None
-#             tree[ii]['p1'] = None
-#             tree[ii]['p0'] = None
-
-
-#     tree = HF.build_tree(tree, features, y, depth, mode='adaboost')
-
-#     # for i in range(1,depth+1):
-#     #     if (len(features)) > 0:
-#     #         tree, features = HF.find_best_feature(tree, layer=i, features=features, y=y, mode='adaboost')
-
-#     tree = {i:j for i,j in tree.items() if j != {}}	# removing empty keys
-
-
-#     return tree
-
-
 #calculate the weighted error, returns a log of the results too
 #for the log, 0 if guess is correct, 1 if wrong
 def calcError(h,data,features,y):
@@ -232,7 +161,7 @@ for L in learners:
         guess = toEatOrNotToEat(H,Alpha,ex)
         if guess != ex[y]:
             howmanywrong += 1
-    print('{} many wrong'.format(howmanywrong))
+    print('{} wrong'.format(howmanywrong))
 
 
 # HF.write_out_tree(tree, path_to_outfile)

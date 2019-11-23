@@ -1,7 +1,4 @@
 import os 
-import numpy as np
-import pandas as pd
-import itertools
 import HelperFunctions as HF
 
 
@@ -45,3 +42,5 @@ for depth in depth_vals:
 	path_to_outfile = os.path.join(os.getcwd(), '..', 'output', 'part1', 'part1c_D{}.csv' .format(depth))
 	HF.write_out_tree(tree, path_to_outfile)
 
+
+# --- part 1d --- 
