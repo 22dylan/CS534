@@ -266,6 +266,34 @@ def predict_with_tree(path_to_tree_csv, data, y=None):
 
 	return tree
 
+#using a single learned tree
+#returns 1 if poisonous
+def useTree(tree,ex):
+    #start with root
+    node = 'root'
+    feat = tree[node]['split_on'] #what feature to split on
+    node = str(int(ex[feat]))
+    # print('feat: {}, node: {}'.format(feat, node))
+    # print(tree.keys())
+    if tree[node]['split_on'] is None:
+        if tree[node]['p1'] >= tree[node]['p0']:
+            return 1
+        else:
+            return -1
+
+    #loop until done
+    while(True):
+        feat = tree[node]['split_on']
+        # print('feat: {}'.format(feat))
+        newNode = node + '-' + str(int(ex[feat])) #set next node
+        #check if newNode exists
+        # if newNode not in tree.keys():
+        if tree[node]['split_on'] is None:
+            if tree[node]['p1'] >= tree[node]['p0']:
+                return 1
+            else:
+                return -1
+        node = newNode
 
 
 
