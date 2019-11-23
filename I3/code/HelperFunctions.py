@@ -1,6 +1,8 @@
 import numpy as np
 import pandas as pd
 import copy
+import itertools
+
 
 def datareader(path_to_data):
 	""" 
@@ -266,9 +268,68 @@ def predict_with_tree(path_to_tree_csv, data, y=None):
 
 	return tree
 
+<<<<<<< Updated upstream
 
 
 
 
 
 	
+=======
+def make_tree(data, depth, features, y):
+	"""
+	creating tree by predefining all possible paths
+	    -example of nomenclature:
+	                  root
+	                 /    \
+	               1	    0
+	             /   \    /   \
+	            11   10  01    00
+	      etc.etc.etc.etc.etc.etc.etc.etc.
+	                etcetera
+	                  etc.
+	"""
+	c0 = len(data.loc[data[y] == 0])
+	c1 = len(data.loc[data[y] == 1])
+	p1 = (c1 / (c1 + c0))  # probabilty that y=1
+	p0 = (c0 / (c1 + c0))  # probabilty that y=0
+
+	tree = {}
+	tree['root'] = {}
+	tree['root']['data'] = data
+	tree['root']['f=0'] = c0
+	tree['root']['f=1'] = c1
+	tree['root']['prob'] = 1
+	tree['root']['U'] = 1 - (c1 / (c1 + c0)) ** 2 - (c0 / (c1 + c0)) ** 2  # note: want to confirm this.
+	tree['root']['continue'] = True
+	tree['root']['split_on'] = None
+	tree['root']['p1'] = p1
+	tree['root']['p0'] = p0
+
+	for i in range(depth):
+		temp = list(itertools.product([1, 0], repeat=i + 1))
+
+		if len(temp[0]) == 1:
+			temp = [str(i[0]) for i in temp]
+		else:
+			temp = ['-'.join(map(str, i)) for i in temp]
+		for ii in temp:
+			tree[ii] = {}
+			tree[ii]['data'] = None
+			tree[ii]['f=0'] = None
+			tree[ii]['f=1'] = None
+			tree[ii]['prob'] = None
+			tree[ii]['U'] = None
+			tree[ii]['continue'] = None
+			tree[ii]['split_on'] = None
+			tree[ii]['p1'] = None
+			tree[ii]['p0'] = None
+
+	for i in range(1, depth + 1):
+		if (len(features)) > 0:
+			tree, features = find_best_feature(tree, layer=i, features=features, y=y)
+
+	tree = {i: j for i, j in tree.items() if j != {}}  # removing empty keys
+
+	return tree
+>>>>>>> Stashed changes
