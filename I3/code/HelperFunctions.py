@@ -300,6 +300,7 @@ def write_out_tree(tree, path_to_outfile):
 def build_tree_from_csv(path_to_csv, data, y=None):
     # --- creating the tree ---
     tree_csv = pd.read_csv(path_to_csv)
+    tree_csv.replace('None', None, inplace=True)
     tree = {}
     for index, row in tree_csv.iterrows():
         node = row['node']
@@ -307,36 +308,42 @@ def build_tree_from_csv(path_to_csv, data, y=None):
         tree[node]['split_on'] = row['split']
         tree[node]['p1'] = row['p1']
         tree[node]['p0'] = row['p0']
+        tree[node]['feature_path'] = row['feature_path']
 
-    # --- running data through tree ---
-    tree['root']['data'] = data
-    for node in tree.keys():
-        data = tree[node]['data']
-        if tree[node]['split_on'] != 'None':
-            if node == 'root':
-                children = ['1', '0']
-            else:
-                children = [node+'-1', node+'-0']
-            for child in children:
-                split_val = int(child.split('-')[-1])
-                child_data = data.loc[data[tree[node]['split_on']]==split_val]  # where feature is 1
-                tree[child]['data'] = child_data
+    # # --- running data through tree ---
+    # tree['root']['data'] = data
+    # for node in tree.keys():
+    #     data = tree[node]['data']
+    #     if tree[node]['split_on'] != 'None':
+    #         if node == 'root':
+    #             children = ['1', '0']
+    #         else:
+    #             children = [node+'-1', node+'-0']
+    #         for child in children:
+    #             split_val = int(child.split('-')[-1])
+    #             child_data = data.loc[data[tree[node]['split_on']]==split_val]  # where feature is 1
+    #             tree[child]['data'] = child_data
+
     return tree
 
-def calc_accuracy(path_to_csv, data, y):
-    # tree_csv = pd.read_csv(path_to_csv)
+def calc_error(path_to_csv, data, y, mode='DT'):
     tree = build_tree_from_csv(path_to_csv, data)
+    error_count = 0
+    errlog = []
+    y_pred_tot = []
     for index,ex in data.iterrows():
-        # print('\n\n')
-        # print(ex[y])
-        print(ex)
-        if (useTree(tree,ex) == ex[y]):
+        y_pred = useTree(tree, ex)
+        y_pred_tot.append(y_pred)
+        if (y_pred == ex[y]):
             errlog.append(0) 
         else:
             errlog.append(1)
-            error += ex['D']
+            if mode=='adaboost':
+                error_count += ex['D']
+            else:
+                error_count+=1
         # i += 1
-    return error
+    return error_count, y_pred_tot
 
 #using a single learned tree
 #returns 1 if poisonous
@@ -346,7 +353,6 @@ def useTree(tree,ex):
     feat = tree[node]['split_on'] #what feature to split on
     node = str(int(ex[feat]))
     # print('feat: {}, node: {}'.format(feat, node))
-    # print(tree.keys())
     if tree[node]['split_on'] is None:
         if tree[node]['p1'] >= tree[node]['p0']:
             return 1
@@ -356,15 +362,15 @@ def useTree(tree,ex):
     #loop until done
     while(True):
         feat = tree[node]['split_on']
-        # print('feat: {}'.format(feat))
-        newNode = node + '-' + str(int(ex[feat])) #set next node
         #check if newNode exists
         # if newNode not in tree.keys():
-        if tree[node]['split_on'] is None:
+        if (tree[node]['split_on'] is None) or (tree[node]['split_on'] == "None"):
             if tree[node]['p1'] >= tree[node]['p0']:
                 return 1
             else:
                 return -1
+        newNode = node + '-' + str(int(ex[feat])) #set next node
+
         node = newNode
 
 
