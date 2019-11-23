@@ -47,3 +47,17 @@ for i in n:
         path_to_outfile = os.path.join(os.getcwd(), '..', 'output', 'part2', 'TEST_M{}.csv' .format(depth))
         HF.write_out_tree(tree, path_to_outfile)
 
+n = 15
+m = [1 2 5 10 25 50]
+
+for i in m:
+    for ii in range(0, m[i]):
+        sub_data = df.sample(len(data), replace=True, random_state=1) # sub-sample data
+        sub_data = sub_data.sample(m(i), axis = 1) # choose features to keep
+        sub_data = sub_data.join(data[y])
+        features = sub_data.columns[0:-1]
+        key = 'randfor_n='+str(ii)
+        tree[key] = HF.make_tree(sub_data, depth, features, y)
+
+        path_to_outfile = os.path.join(os.getcwd(), '..', 'output', 'part2', 'TEST_M{}.csv' .format(depth))
+        HF.write_out_tree(tree, path_to_outfile)
