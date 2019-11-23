@@ -31,7 +31,7 @@ y = data.columns[-1]
 
 # --- Part 1a ---
 """ create a tree with a maximum depth of 2 """
-depth = 2
+depth = 4
 
 """  
 creating tree by predefining all possible paths 
@@ -85,12 +85,21 @@ for i in range(depth):
 
 
 
-tree = HF.build_tree(tree, features, y)
+tree = HF.build_tree(tree, features, y, depth)
 
-for key in tree.keys():
-	print(key)
-	print(tree[key])
-	print()
+# for key in tree.keys():
+# 	print(key)
+# 	print(tree[key]['f=0'])
+# 	print(tree[key]['f=1'])
+# 	print(tree[key]['prob'])
+# 	print(tree[key]['U'])
+# 	print(tree[key]['continue'])
+# 	print(tree[key]['split_on'])
+# 	print(tree[key]['p1'])
+# 	print(tree[key]['p0'])
+# 	print(tree[key]['feature_path'])
+# 	print('____________________________________________')
+
 
 # for i in range(1,depth+1):
 # 	if (len(features)) > 0:
