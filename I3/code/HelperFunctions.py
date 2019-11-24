@@ -17,7 +17,8 @@ def datareader(path_to_data):
 
     df = pd.read_csv(path_to_data, dtype='float') #you wanted float datatype
     df = df.drop(['veil-type_p'], axis=1)
-    df['class'].replace(0, -1,inplace=True)
+    if 'class' in list(df.columns.values):
+        df['class'].replace(0, -1,inplace=True)
     return df
 
 
@@ -330,7 +331,7 @@ def build_tree_from_csv(path_to_csv, data, y=None):
 
     return tree
 
-def calc_error(path_to_csv, data, y, mode='DT'):
+def calc_error(path_to_csv, data, y=None, mode='DT'):
     tree = build_tree_from_csv(path_to_csv, data)
     error_count = 0
     errlog = []
@@ -338,14 +339,16 @@ def calc_error(path_to_csv, data, y, mode='DT'):
     for index,ex in data.iterrows():
         y_pred = useTree(tree, ex)
         y_pred_tot.append(y_pred)
-        if (y_pred == ex[y]):
-            errlog.append(0) 
-        else:
-            errlog.append(1)
-            if mode=='adaboost':
-                error_count += ex['D']
+
+        if y != None:
+            if (y_pred == ex[y]):
+                errlog.append(0) 
             else:
-                error_count+=1
+                errlog.append(1)
+                if mode=='adaboost':
+                    error_count += ex['D']
+                else:
+                    error_count+=1
         # i += 1
     return error_count, y_pred_tot
 
