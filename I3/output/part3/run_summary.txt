@@ -1,0 +1,7 @@
+L1d1: wrong_train: 577, wrong_val: 168
+L2d1: wrong_train: 577, wrong_val: 168
+L5d1: wrong_train: 267, wrong_val: 69
+L10d1: wrong_train: 91, wrong_val: 22
+L15d1: wrong_train: 119, wrong_val: 29
+L6d2: wrong_train: 80, wrong_val: 17
+Best Adaboost with L6d2

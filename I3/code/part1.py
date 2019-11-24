@@ -1,177 +1,104 @@
 import os 
-import numpy as np
-import HelperFunctions as HF
 import pandas as pd
-import itertools
+import HelperFunctions as HF
+import matplotlib
+matplotlib.use('TkAgg')
+import matplotlib.pyplot as plt
 
 
-# # -- all data --- 
-# path_to_data = os.path.join(os.getcwd(), '..', 'data', 'pa3_train.csv')
-# data = HF.datareader(path_to_data)
-# features= list(data.columns[:-1])
-# y = data.columns[-1]
-
-# --- manageable test data --- 
-data = np.array([[0,0,0, 1],
-				[0,0,1, 0],
-				[0,1,0, 0],
-				[0,1,1, 1],
-				[1,0,0, 0],
-				[1,0,1, 0],
-				[1,1,0, 1],
-				[1,1,1, 1]])
-
-column_names = ['x1', 'x2', 'x3', 'f']
-data = pd.DataFrame(data)
-data.columns = column_names
-features = column_names[:-1]
-y = column_names[-1]
-
-
-
-# --- Part 1a ---
+# -------- Part 1a --------
 """ create a tree with a maximum depth of 2 """
+
+# reading in data
+path_to_data = os.path.join(os.getcwd(), '..', 'data', 'pa3_train.csv')
+data = HF.datareader(path_to_data)
+features= list(data.columns[:-1])
+y = data.columns[-1]
+
+# creating and saving tree
 depth = 2
-
-"""  
-creating tree by predefining all possible paths 
-	-example of nomenclature:
-				  root
-	             /    \
-			   1	    0
-		     /   \    /   \
-		    11   10  01    00
-	  etc.etc.etc.etc.etc.etc.etc.etc.
-	  		    etcetera
-	  		      etc.
-"""
-c0 = len(data.loc[data[y] == 0])
-c1 = len(data.loc[data[y] == 1])
-p1 = (c1/(c1+c0))				# probabilty that y=1
-p0 = (c0/(c1+c0))				# probabilty that y=0
-
-tree = {}
-tree['root'] = {}
-tree['root']['data'] = data
-tree['root']['f=0'] = c0
-tree['root']['f=1'] = c1
-tree['root']['prob'] = 1
-tree['root']['U'] = 1 - (c1/(c1+c0))**2 - (c0/(c1+c0))**2				#note: want to confirm this.
-tree['root']['continue'] = True
-tree['root']['split_on'] = None
-tree['root']['p1'] = p1
-tree['root']['p0'] = p0
-
-
-for i in range(depth):
-	temp = list(itertools.product([1,0], repeat=i+1))
-
-	if len(temp[0]) == 1:
-		temp = [str(i[0]) for i in temp]
-	else:
-		temp = ['-'.join(map(str, i)) for i in temp]
-	for ii in temp:
-		tree[ii] = {}
-		tree[ii]['data'] = None
-		tree[ii]['f=0'] = None
-		tree[ii]['f=1'] = None
-		tree[ii]['prob'] = None
-		tree[ii]['U'] = None
-		tree[ii]['continue'] = None
-		tree[ii]['split_on'] = None
-		tree[ii]['p1'] = None
-		tree[ii]['p0'] = None
-
-for i in range(1,depth+1):
-	if (len(features)) > 0:
-		tree, features = HF.find_best_feature(tree, layer=i, features=features, y=y)
-
-tree = {i:j for i,j in tree.items() if j != {}}	# removing empty keys
-
-path_to_outfile = os.path.join(os.getcwd(), '..', 'output', 'part1', 'TEST_D{}.csv' .format(depth))
+tree = HF.learn(data,features,y,depth, mode='DT', view_tree=False)
+path_to_outfile = os.path.join(os.getcwd(), '..', 'output', 'part1', 'part1a_D{}.csv' .format(depth))
 HF.write_out_tree(tree, path_to_outfile)
 
 
+# -------- Part 1b --------
+""" computing training and validation accuracy """
+path_to_train_data = os.path.join(os.getcwd(), '..', 'data', 'pa3_train.csv')
+path_to_val_data = os.path.join(os.getcwd(), '..', 'data', 'pa3_val.csv')
+path_to_tree = os.path.join(os.getcwd(), '..', 'output', 'part1', 'part1a_D{}.csv' .format(depth))
 
-# --- part 1b ---
-# path_to_train_data = os.path.join(os.getcwd(), '..', 'data', 'pa3_train.csv')
-# path_to_val_data = os.path.join(os.getcwd(), '..', 'data', 'pa3_val.csv')
-# path_to_tree = os.path.join(os.getcwd(), '..', 'output', 'part1', 'part1a_D2.csv')
-# data = HF.datareader(path_to_train_data)
+data_trn = HF.datareader(path_to_train_data)
+data_val = HF.datareader(path_to_val_data)
+y = data_trn.columns[-1]
+error_count_trn, _ = HF.calc_error(path_to_tree, data_trn, y)
+error_count_val, _ = HF.calc_error(path_to_tree, data_val, y)
+
+acc_trn = 1 - (error_count_trn/len(data_trn))
+acc_val = 1 - (error_count_val/len(data_val))
+print('Depth {} Training Accuracy: {}' .format(depth, acc_trn))
+print('Depth {} Validation Accuracy: {}\n' .format(depth, acc_val))
 
 
-# # --- manageable test data --- 
-# path_to_tree = os.path.join(os.getcwd(), '..', 'output', 'part1', 'TEST_D2.csv')
-# data = np.array([[0,0,0, 1],
-# 				[0,0,1, 0],
-# 				[0,1,0, 0],
-# 				[0,1,1, 1],
-# 				[1,0,0, 0],
-# 				[1,0,1, 0],
-# 				[1,1,0, 1],
-# 				[1,1,1, 1]])
+# -------- Part 1c --------
+""" create a tree with a maximum depth ranging from 1-8 """
+depth_vals = [1, 2, 3, 4, 5, 6, 7, 8]
 
-# column_names = ['x1', 'x2', 'x3', 'f']
-# data = pd.DataFrame(data)
-# data.columns = column_names
-# features = column_names[:-1]
-# y = column_names[-1]
+# depth_vals = [3]
+# -- fitting tree --
+for depth in depth_vals:
+	print(depth)
 
-# tree = HF.build_tree(path_to_tree, data)
-# print(tree)
+	# re-reading data for a fresh start
+	path_to_data = os.path.join(os.getcwd(), '..', 'data', 'pa3_train.csv')
+	data = HF.datareader(path_to_data)
+	features= list(data.columns[:-1])
+	y = data.columns[-1]
 
-# # --- Part 1c ---
-# """ create a tree with a maximum depth ranging from 1-8 """
-# depth_vals = [1, 2, 3, 4, 5, 6, 7, 8]
+	tree = HF.learn(data, features, y, depth, mode='DT', view_tree=False)
+	path_to_outfile = os.path.join(os.getcwd(), '..', 'output', 'part1', 'part1c_D{}.csv' .format(depth))
+	HF.write_out_tree(tree, path_to_outfile)
 
-# for depth in depth_vals:
-# 	print(depth)
+# -- checking accuracy --
+path_to_train_data = os.path.join(os.getcwd(), '..', 'data', 'pa3_train.csv')
+path_to_val_data = os.path.join(os.getcwd(), '..', 'data', 'pa3_val.csv')
+data_trn = HF.datareader(path_to_train_data)
+data_val = HF.datareader(path_to_val_data)
 
-# 	# re-reading data for a fresh start
-# 	path_to_data = os.path.join(os.getcwd(), '..', 'data', 'pa3_train.csv')
-# 	data = HF.datareader(path_to_data)
-# 	features= list(data.columns[:-1])
-# 	y = data.columns[-1]
+train_acc = []
+val_acc = []
+for depth in depth_vals:
+	path_to_tree = os.path.join(os.getcwd(), '..', 'output', 'part1', 'part1c_D{}.csv' .format(depth))
+	y = data_trn.columns[-1]
+	error_count_trn, _ = HF.calc_error(path_to_tree, data_trn, y)
+	error_count_val, _ = HF.calc_error(path_to_tree, data_val, y)
 
-# 	c0 = len(data.loc[data[y] == 0])
-# 	c1 = len(data.loc[data[y] == 1])
+	acc_trn = 1 - (error_count_trn/len(data_trn))
+	acc_val = 1 - (error_count_val/len(data_val))
 
-# 	tree = {}
-# 	tree['root'] = {}
-# 	tree['root']['data'] = data
-# 	tree['root']['f=0'] = c0
-# 	tree['root']['f=1'] = c1
-# 	tree['root']['prob'] = 1
-# 	tree['root']['U'] = 1 - (c1/(c1+c0))**2 - (c0/(c1+c0))**2				#note: want to confirm this.
-# 	tree['root']['continue'] = True
-# 	tree['root']['split_on'] = None
+	train_acc.append(acc_trn)
+	val_acc.append(acc_val)
 
-# 	for i in range(depth):
-# 		temp = list(itertools.product([1,0], repeat=i+1))
+# writing to csv
+path_to_outfile = os.path.join(os.getcwd(), '..', 'output', 'part1', 'ValAcc_Results.csv')
+df = pd.DataFrame(
+    {'depth': depth_vals,
+     'train': train_acc,
+     'validation': val_acc
+    })
+df.to_csv(path_to_outfile, index=False, na_rep="None")
 
-# 		if len(temp[0]) == 1:
-# 			temp = [str(i[0]) for i in temp]
-# 		else:
-# 			temp = ['-'.join(map(str, i)) for i in temp]
-# 		for ii in temp:
-# 			tree[ii] = {}
-# 			tree[ii]['data'] = None
-# 			tree[ii]['f=0'] = None
-# 			tree[ii]['f=1'] = None
-# 			tree[ii]['prob'] = None
-# 			tree[ii]['U'] = None
-# 			tree[ii]['continue'] = None
-# 			tree[ii]['split_on'] = None
-# 			tree[ii]['p1'] = None
-# 			tree[ii]['p0'] = None
+# plotting results
+fig, ax = plt.subplots(1,1, figsize=(10, 6))
+ax.plot(depth_vals, train_acc, color='k', ls='-', label='Training')
+ax.plot(depth_vals, val_acc, color='k', ls='-.', label='Validation')
+ax.set_xlabel('Depth')
+ax.set_ylabel('Accuracy')
+ax.legend()
+ax.grid()
 
-# 	for i in range(1,depth+1):
-# 		if (len(features)) > 0:
-# 			tree, features = HF.find_best_feature(tree, layer=i, features=features, y=y)
 
-# 	tree = {i:j for i,j in tree.items() if j != {}}	# removing empty keys
+plt.show()
 
-# 	path_to_outfile = os.path.join(os.getcwd(), '..', 'output', 'part1', 'part1c_D{}.csv' .format(depth))
-# 	HF.write_out_tree(tree, path_to_outfile)
 
 
