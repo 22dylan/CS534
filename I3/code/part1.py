@@ -57,7 +57,7 @@ for depth in depth_vals:
 
 	tree = HF.learn(data, features, y, depth, mode='DT', view_tree=False)
 	path_to_outfile = os.path.join(os.getcwd(), '..', 'output', 'part1', 'part1c_D{}.csv' .format(depth))
-	HF.write_out_tree(tree, path_to_outfile)3
+	HF.write_out_tree(tree, path_to_outfile)
 
 # -- checking accuracy --
 path_to_train_data = os.path.join(os.getcwd(), '..', 'data', 'pa3_train.csv')

@@ -64,6 +64,12 @@ def split_tree(tree, node, features, y, depth, mode='DT'):
 
                 p1 = len(data_1)/len(temp_data)
                 p0 = len(data_0)/len(temp_data)
+                if mode == 'adaboost':
+                    sum1 = (data_1.sum()['D']) #0
+                    sum0 = (data_0.sum()['D'])
+                    sum_temp = (temp_data.sum()['D']) # 0
+                    p1 = (sum1/(sum_temp))                # probabilty that y=1
+                    p0 = (sum0/(sum_temp))                # probabilty that y=0
 
                 if (c1_1 == 0) and (c1_0 == 0):
                     p1_1 = 0
@@ -72,7 +78,7 @@ def split_tree(tree, node, features, y, depth, mode='DT'):
                     sumD1 = (data_1.loc[data_1[y] == 1].sum()['D']) #0
                     sumD0 = (data_1.loc[data_1[y] == -1].sum()['D']) # 0
                     p1_1 = (sumD1/(sumD1+sumD0))                # probabilty that y=1
-                    p0_1 = (sumD0/(sumD1+sumD0))                # probabilty that y=0
+                    p1_0 = (sumD0/(sumD1+sumD0))                # probabilty that y=0
                 else:
                     p1_1 = (c1_1/(c1_1+c1_0))               # probabilty that y=1
                     p1_0 = (c1_0/(c1_1+c1_0))               # probabilty that y=0
@@ -360,7 +366,7 @@ def useTree(tree,ex):
     feat = tree[node]['split_on'] #what feature to split on
     node = str(int(ex[feat]))
     # print('feat: {}, node: {}'.format(feat, node))
-    if tree[node]['split_on'] is None:
+    if (tree[node]['split_on'] is None) or (tree[node]['split_on'] == "None"):
         if tree[node]['p1'] >= tree[node]['p0']:
             return 1
         else:
@@ -369,15 +375,20 @@ def useTree(tree,ex):
     #loop until done
     while(True):
         feat = tree[node]['split_on']
-        #check if newNode exists
-        # if newNode not in tree.keys():
-        #     pass
+
         if (tree[node]['split_on'] is None) or (tree[node]['split_on'] == "None"):
             if tree[node]['p1'] >= tree[node]['p0']:
                 return 1
             else:
                 return -1
+                
         newNode = node + '-' + str(int(ex[feat])) #set next node
+        if newNode not in tree.keys():
+            if tree[node]['p1'] >= tree[node]['p0']:
+                return 1
+            else:
+                return -1
+
         node = newNode
 
 
