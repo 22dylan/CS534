@@ -1,0 +1,8 @@
+node,split,p1,p0,feature_path
+root,veil-color_w,0.48871563397620027,0.5112843660237998,None
+1,gill-size_n,0.49979018044481743,0.5002098195551825,['veil-color_w']
+0,None,0.0,1.0,['veil-color_w']
+1-1,None,0.8854766474728087,0.1145233525271913,"['veil-color_w', 'gill-size_n']"
+1-0,None,0.3115828910396503,0.6884171089603497,"['veil-color_w', 'gill-size_n']"
+0-1,None,0.0,0.0,"['veil-color_w', 'spore-print-color_k']"
+0-0,None,0.0,1.0,"['veil-color_w', 'spore-print-color_k']"

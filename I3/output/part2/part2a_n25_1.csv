@@ -1,8 +1,0 @@
-node,split,p1,p0,feature_path
-root,gill-color_b,0.48871563397620027,0.5112843660237998,None
-1,None,1.0,0.0,['gill-color_b']
-0,veil-color_n,0.34610338493833637,0.6538966150616636,['gill-color_b']
-1-1,None,0.0,0.0,"['gill-color_b', 'spore-print-color_y']"
-1-0,None,1.0,0.0,"['gill-color_b', 'spore-print-color_y']"
-0-1,None,0.0,1.0,"['gill-color_b', 'veil-color_n']"
-0-0,None,0.3510779877561884,0.6489220122438115,"['gill-color_b', 'veil-color_n']"

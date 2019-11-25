@@ -1,0 +1,8 @@
+node,split,p1,p0,feature_path
+root,cap-shape_b,0.48871563397620027,0.5112843660237998,None
+1,stalk-surface-below-ring_s,0.11397058823529412,0.8860294117647058,['cap-shape_b']
+0,gill-color_w,0.510864841373316,0.48913515862668405,['cap-shape_b']
+1-1,None,0.12083333333333333,0.8791666666666667,"['cap-shape_b', 'stalk-surface-below-ring_s']"
+1-0,None,0.0625,0.9375,"['cap-shape_b', 'stalk-surface-below-ring_s']"
+0-1,None,0.23252496433666192,0.7674750356633381,"['cap-shape_b', 'gill-color_w']"
+0-0,None,0.5608818251730325,0.43911817482696747,"['cap-shape_b', 'gill-color_w']"

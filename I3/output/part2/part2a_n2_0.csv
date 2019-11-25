@@ -1,8 +1,0 @@
-node,split,p1,p0,feature_path
-root,population_a,0.48871563397620027,0.5112843660237998,None
-1,None,0.0,1.0,['population_a']
-0,spore-print-color_r,0.5134727311920673,0.48652726880793273,['population_a']
-1-1,None,0.0,0.0,"['population_a', 'odor_l']"
-1-0,None,0.0,1.0,"['population_a', 'odor_l']"
-0-1,None,1.0,0.0,"['population_a', 'spore-print-color_r']"
-0-0,None,0.508385972554999,0.4916140274450011,"['population_a', 'spore-print-color_r']"

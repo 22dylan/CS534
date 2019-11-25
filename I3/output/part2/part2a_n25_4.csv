@@ -1,8 +1,0 @@
-node,split,p1,p0,feature_path
-root,ring-number_o,0.48871563397620027,0.5112843660237998,None
-1,cap-color_u,0.518510208660534,0.481489791339466,['ring-number_o']
-0,bruises_t,0.17026378896882494,0.829736211031175,['ring-number_o']
-1-1,None,0.0,1.0,"['ring-number_o', 'cap-color_u']"
-1-0,None,0.5194425713643516,0.4805574286356485,"['ring-number_o', 'cap-color_u']"
-0-1,None,0.24870466321243523,0.7512953367875648,"['ring-number_o', 'bruises_t']"
-0-0,None,0.10267857142857142,0.8973214285714286,"['ring-number_o', 'bruises_t']"

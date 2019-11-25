@@ -1,8 +1,0 @@
-node,split,p1,p0,feature_path
-root,gill-attachment_a,0.48871563397620027,0.5112843660237998,None
-1,ring-type_l,0.10743801652892562,0.8925619834710744,['gill-attachment_a']
-0,veil-color_y,0.49842204923206396,0.501577950767936,['gill-attachment_a']
-1-1,None,0.0,0.0,"['gill-attachment_a', 'ring-type_l']"
-1-0,None,0.10743801652892562,0.8925619834710744,"['gill-attachment_a', 'ring-type_l']"
-0-1,None,0.0,0.0,"['gill-attachment_a', 'veil-color_y']"
-0-0,None,0.49842204923206396,0.501577950767936,"['gill-attachment_a', 'veil-color_y']"

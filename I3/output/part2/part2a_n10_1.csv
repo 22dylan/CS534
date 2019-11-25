@@ -1,8 +1,0 @@
-node,split,p1,p0,feature_path
-root,stalk-surface-above-ring_k,0.48871563397620027,0.5112843660237998,None
-1,ring-type_p,0.9412983425414365,0.05870165745856354,['stalk-surface-above-ring_k']
-0,ring-number_n,0.2974314068884997,0.7025685931115003,['stalk-surface-above-ring_k']
-1-1,None,0.0,1.0,"['stalk-surface-above-ring_k', 'ring-type_p']"
-1-0,None,1.0,0.0,"['stalk-surface-above-ring_k', 'ring-type_p']"
-0-1,None,0.0,0.0,"['stalk-surface-above-ring_k', 'ring-number_n']"
-0-0,None,0.2974314068884997,0.7025685931115003,"['stalk-surface-above-ring_k', 'ring-number_n']"

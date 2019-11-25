@@ -1,0 +1,8 @@
+node,split,p1,p0,feature_path
+root,ring-type_f,0.48871563397620027,0.5112843660237998,None
+1,None,0.0,1.0,['ring-type_f']
+0,cap-color_p,0.4918438984100764,0.5081561015899236,['ring-type_f']
+1-1,None,0.0,0.0,"['ring-type_f', 'ring-number_n']"
+1-0,None,0.0,1.0,"['ring-type_f', 'ring-number_n']"
+0-1,None,0.6190476190476191,0.38095238095238093,"['ring-type_f', 'cap-color_p']"
+0-0,None,0.4895986551796596,0.5104013448203404,"['ring-type_f', 'cap-color_p']"

@@ -1,8 +1,0 @@
-node,split,p1,p0,feature_path
-root,stalk-color-below-ring_y,0.48871563397620027,0.5112843660237998,None
-1,None,1.0,0.0,['stalk-color-below-ring_y']
-0,spore-print-color_k,0.48755911988484474,0.5124408801151552,['stalk-color-below-ring_y']
-1-1,None,1.0,0.0,"['stalk-color-below-ring_y', 'cap-color_y']"
-1-0,None,1.0,0.0,"['stalk-color-below-ring_y', 'cap-color_y']"
-0-1,None,0.11938958707360861,0.8806104129263914,"['stalk-color-below-ring_y', 'spore-print-color_k']"
-0-0,None,0.5969591891170979,0.4030408108829021,"['stalk-color-below-ring_y', 'spore-print-color_k']"

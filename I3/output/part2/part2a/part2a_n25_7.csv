@@ -1,0 +1,8 @@
+node,split,p1,p0,feature_path
+root,cap-color_g,0.48871563397620027,0.5112843660237998,None
+1,stalk-color-below-ring_b,0.41397849462365593,0.5860215053763441,['cap-color_g']
+0,ring-type_p,0.5109100585417775,0.48908994145822243,['cap-color_g']
+1-1,None,1.0,0.0,"['cap-color_g', 'stalk-color-below-ring_b']"
+1-0,None,0.34468937875751504,0.655310621242485,"['cap-color_g', 'stalk-color-below-ring_b']"
+0-1,None,0.23941276115189158,0.7605872388481084,"['cap-color_g', 'ring-type_p']"
+0-0,None,0.7528938097634625,0.2471061902365375,"['cap-color_g', 'ring-type_p']"

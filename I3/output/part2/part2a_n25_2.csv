@@ -1,8 +1,0 @@
-node,split,p1,p0,feature_path
-root,stalk-color-above-ring_c,0.48871563397620027,0.5112843660237998,None
-1,None,1.0,0.0,['stalk-color-above-ring_c']
-0,gill-color_e,0.4862914862914863,0.5137085137085137,['stalk-color-above-ring_c']
-1-1,None,0.0,0.0,"['stalk-color-above-ring_c', 'odor_a']"
-1-0,None,1.0,0.0,"['stalk-color-above-ring_c', 'odor_a']"
-0-1,None,0.0,1.0,"['stalk-color-above-ring_c', 'gill-color_e']"
-0-0,None,0.4921760901314417,0.5078239098685583,"['stalk-color-above-ring_c', 'gill-color_e']"

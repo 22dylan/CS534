@@ -1,8 +1,0 @@
-node,split,p1,p0,feature_path
-root,population_n,0.48871563397620027,0.5112843660237998,None
-1,None,0.0,1.0,['population_n']
-0,stalk-color-above-ring_y,0.5173761946133797,0.4826238053866203,['population_n']
-1-1,None,0.0,1.0,"['population_n', 'stalk-surface-above-ring_k']"
-1-0,None,0.0,1.0,"['population_n', 'stalk-surface-above-ring_k']"
-0-1,None,0.0,0.0,"['population_n', 'stalk-color-above-ring_y']"
-0-0,None,0.5173761946133797,0.4826238053866203,"['population_n', 'stalk-color-above-ring_y']"

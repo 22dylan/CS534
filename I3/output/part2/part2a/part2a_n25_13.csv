@@ -1,0 +1,8 @@
+node,split,p1,p0,feature_path
+root,stalk-color-above-ring_g,0.48871563397620027,0.5112843660237998,None
+1,None,0.0,1.0,['stalk-color-above-ring_g']
+0,gill-size_b,0.5239771227452705,0.4760228772547294,['stalk-color-above-ring_g']
+1-1,None,0.0,0.0,"['stalk-color-above-ring_g', 'gill-color_o']"
+1-0,None,0.0,1.0,"['stalk-color-above-ring_g', 'gill-color_o']"
+0-1,None,0.3345625209520617,0.6654374790479383,"['stalk-color-above-ring_g', 'gill-size_b']"
+0-0,None,0.8854766474728087,0.1145233525271913,"['stalk-color-above-ring_g', 'gill-size_b']"

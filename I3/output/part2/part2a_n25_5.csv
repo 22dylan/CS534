@@ -1,8 +1,0 @@
-node,split,p1,p0,feature_path
-root,habitat_p,0.48871563397620027,0.5112843660237998,None
-1,gill-color_e,0.8838526912181303,0.11614730878186968,['habitat_p']
-0,stalk-color-below-ring_b,0.42178502879078694,0.5782149712092131,['habitat_p']
-1-1,None,0.0,0.0,"['habitat_p', 'gill-color_e']"
-1-0,None,0.8838526912181303,0.11614730878186968,"['habitat_p', 'gill-color_e']"
-0-1,None,1.0,0.0,"['habitat_p', 'stalk-color-below-ring_b']"
-0-0,None,0.39870259481037923,0.6012974051896207,"['habitat_p', 'stalk-color-below-ring_b']"

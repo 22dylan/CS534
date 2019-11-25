@@ -129,7 +129,7 @@ def split_tree(tree, node, features, y, depth, m, mode='DT'):
                     if (c0_1 == 0) or (c0_0 == 0):
                         continue_tf_0 = False
                 mcount=mcount+1
-                if mcount == m-1:
+                if mcount == m:
                     break
         if node == 'root':
             tree[node]['feature_path'].append(sel_feature)
@@ -346,10 +346,21 @@ def build_tree_from_csv(path_to_csv, data, y=None):
     return tree
 
 
-def calc_error(path_to_csv, data, y=None, mode='DT'):
-    tree = build_tree_from_csv(path_to_csv, data)
+def calc_error(path_to_csv, data, y=None, mode='DT',y_pred=[]):
     error_count = 0
     errlog = []
+    if mode == 'RF':
+        for index, ex in data.iterrows():
+            if y != None:
+                if (y_pred[index] == ex[y]):
+                    errlog.append(0)
+                else:
+                    errlog.append(1)
+                    error_count += 1
+            # i += 1
+        return error_count
+
+    tree = build_tree_from_csv(path_to_csv, data)
     y_pred_tot = []
     for index, ex in data.iterrows():
         y_pred = useTree(tree, ex)
@@ -400,3 +411,6 @@ def useTree(tree, ex):
                 return -1
 
         node = newNode
+
+def bag_predict(self, x):
+    return np.mean([t.predict(x) for t in self.trees], axis=0)

@@ -1,8 +1,0 @@
-node,split,p1,p0,feature_path
-root,ring-type_f,0.48871563397620027,0.5112843660237998,None
-1,None,0.0,1.0,['ring-type_f']
-0,population_y,0.4918438984100764,0.5081561015899236,['ring-type_f']
-1-1,None,0.0,0.0,"['ring-type_f', 'stalk-surface-below-ring_y']"
-1-0,None,0.0,1.0,"['ring-type_f', 'stalk-surface-below-ring_y']"
-0-1,None,0.3860887096774194,0.6139112903225806,"['ring-type_f', 'population_y']"
-0-0,None,0.5190859517008569,0.4809140482991431,"['ring-type_f', 'population_y']"

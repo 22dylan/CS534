@@ -1,0 +1,8 @@
+node,split,p1,p0,feature_path
+root,odor_p,0.48871563397620027,0.5112843660237998,None
+1,None,1.0,0.0,['odor_p']
+0,population_n,0.4700127605274351,0.5299872394725649,['odor_p']
+1-1,None,0.0,0.0,"['odor_p', 'odor_y']"
+1-0,None,1.0,0.0,"['odor_p', 'odor_y']"
+0-1,None,0.0,1.0,"['odor_p', 'population_n']"
+0-0,None,0.49864620938628157,0.5013537906137184,"['odor_p', 'population_n']"

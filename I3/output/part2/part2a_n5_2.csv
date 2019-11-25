@@ -1,8 +1,0 @@
-node,split,p1,p0,feature_path
-root,veil-color_w,0.48871563397620027,0.5112843660237998,None
-1,stalk-color-below-ring_c,0.49979018044481743,0.5002098195551825,['veil-color_w']
-0,None,0.0,1.0,['veil-color_w']
-1-1,None,1.0,0.0,"['veil-color_w', 'stalk-color-below-ring_c']"
-1-0,None,0.49736453721273455,0.5026354627872655,"['veil-color_w', 'stalk-color-below-ring_c']"
-0-1,None,0.0,1.0,"['veil-color_w', 'gill-color_o']"
-0-0,None,0.0,1.0,"['veil-color_w', 'gill-color_o']"

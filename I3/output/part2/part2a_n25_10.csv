@@ -1,8 +1,0 @@
-node,split,p1,p0,feature_path
-root,habitat_g,0.48871563397620027,0.5112843660237998,None
-1,ring-type_e,0.34977578475336324,0.6502242152466368,['habitat_g']
-0,cap-color_r,0.541289592760181,0.458710407239819,['habitat_g']
-1-1,None,0.0,1.0,"['habitat_g', 'ring-type_e']"
-1-0,None,0.5336374002280502,0.4663625997719498,"['habitat_g', 'ring-type_e']"
-0-1,None,0.0,1.0,"['habitat_g', 'cap-color_r']"
-0-0,None,0.5426708250637936,0.4573291749362064,"['habitat_g', 'cap-color_r']"

@@ -1,8 +1,0 @@
-node,split,p1,p0,feature_path
-root,habitat_d,0.48871563397620027,0.5112843660237998,None
-1,gill-size_b,0.4103825136612022,0.5896174863387978,['habitat_d']
-0,stalk-surface-below-ring_f,0.53580814717477,0.46419185282522996,['habitat_d']
-1-1,None,0.21098726114649682,0.7890127388535032,"['habitat_d', 'gill-size_b']"
-1-0,None,0.8466898954703833,0.15331010452961671,"['habitat_d', 'gill-size_b']"
-0-1,None,0.2976878612716763,0.7023121387283237,"['habitat_d', 'stalk-surface-below-ring_f']"
-0-0,None,0.5663454410674573,0.4336545589325426,"['habitat_d', 'stalk-surface-below-ring_f']"

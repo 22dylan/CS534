@@ -1,8 +1,0 @@
-node,split,p1,p0,feature_path
-root,stalk-color-above-ring_n,0.48871563397620027,0.5112843660237998,None
-1,gill-spacing_w,0.9437751004016064,0.05622489959839357,['stalk-color-above-ring_n']
-0,gill-color_k,0.4642162162162162,0.5357837837837838,['stalk-color-above-ring_n']
-1-1,None,0.0,0.0,"['stalk-color-above-ring_n', 'gill-spacing_w']"
-1-0,None,0.9437751004016064,0.05622489959839357,"['stalk-color-above-ring_n', 'gill-spacing_w']"
-0-1,None,0.18828451882845187,0.8117154811715481,"['stalk-color-above-ring_n', 'gill-color_k']"
-0-0,None,0.4792521659826721,0.5207478340173278,"['stalk-color-above-ring_n', 'gill-color_k']"

@@ -1,8 +1,0 @@
-node,split,p1,p0,feature_path
-root,cap-shape_x,0.48871563397620027,0.5112843660237998,None
-1,cap-surface_f,0.4946833102172908,0.5053166897827092,['cap-shape_x']
-0,habitat_w,0.48395426042050904,0.516045739579491,['cap-shape_x']
-1-1,None,0.3909657320872274,0.6090342679127726,"['cap-shape_x', 'cap-surface_f']"
-1-0,None,0.5384615384615384,0.46153846153846156,"['cap-shape_x', 'cap-surface_f']"
-0-1,None,0.0,1.0,"['cap-shape_x', 'habitat_w']"
-0-0,None,0.49848024316109424,0.5015197568389058,"['cap-shape_x', 'habitat_w']"

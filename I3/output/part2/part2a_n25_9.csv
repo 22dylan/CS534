@@ -1,8 +1,0 @@
-node,split,p1,p0,feature_path
-root,population_c,0.48871563397620027,0.5112843660237998,None
-1,ring-type_n,0.15841584158415842,0.8415841584158416,['population_c']
-0,habitat_l,0.5029965753424658,0.4970034246575342,['population_c']
-1-1,None,1.0,0.0,"['population_c', 'ring-type_n']"
-1-0,None,0.05027932960893855,0.9497206703910615,"['population_c', 'ring-type_n']"
-0-1,None,0.7990543735224587,0.20094562647754138,"['population_c', 'habitat_l']"
-0-0,None,0.47352318192515885,0.5264768180748411,"['population_c', 'habitat_l']"

@@ -1,8 +1,0 @@
-node,split,p1,p0,feature_path
-root,cap-shape_f,0.48871563397620027,0.5112843660237998,None
-1,gill-color_h,0.47976254722072315,0.5202374527792768,['cap-shape_f']
-0,cap-shape_c,0.49420721615359153,0.5057927838464085,['cap-shape_f']
-1-1,None,0.6375545851528385,0.3624454148471616,"['cap-shape_f', 'gill-color_h']"
-1-0,None,0.45751231527093594,0.5424876847290641,"['cap-shape_f', 'gill-color_h']"
-0-1,None,0.0,0.0,"['cap-shape_f', 'cap-shape_c']"
-0-0,None,0.49420721615359153,0.5057927838464085,"['cap-shape_f', 'cap-shape_c']"
