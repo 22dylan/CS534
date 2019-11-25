@@ -1,8 +1,8 @@
 node,split,p1,p0,feature_path
-root,stalk-surface-below-ring_y,0.48871563397620027,0.5112843660237998,None
-1,ring-number_o,0.3048780487804878,0.6951219512195121,['stalk-surface-below-ring_y']
-0,population_n,0.4951167728237792,0.5048832271762208,['stalk-surface-below-ring_y']
-1-1,None,0.2125984251968504,0.7874015748031497,"['stalk-surface-below-ring_y', 'ring-number_o']"
-1-0,None,0.6216216216216216,0.3783783783783784,"['stalk-surface-below-ring_y', 'ring-number_o']"
-0-1,None,0.0,1.0,"['stalk-surface-below-ring_y', 'population_n']"
-0-0,None,0.5252252252252252,0.47477477477477475,"['stalk-surface-below-ring_y', 'population_n']"
+root,ring-number_t,0.48871563397620027,0.5112843660237998,None
+1,stalk-shape_e,0.1218274111675127,0.8781725888324873,['ring-number_t']
+0,bruises_t,0.5209821428571428,0.47901785714285716,['ring-number_t']
+1-1,None,0.1218274111675127,0.8781725888324873,"['ring-number_t', 'stalk-shape_e']"
+1-0,None,0.0,0.0,"['ring-number_t', 'stalk-shape_e']"
+0-1,None,0.19524336283185842,0.8047566371681416,"['ring-number_t', 'bruises_t']"
+0-0,None,0.7413922155688623,0.25860778443113774,"['ring-number_t', 'bruises_t']"

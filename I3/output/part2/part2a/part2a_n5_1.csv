@@ -1,8 +1,8 @@
 node,split,p1,p0,feature_path
-root,stalk-surface-above-ring_s,0.48871563397620027,0.5112843660237998,None
-1,population_v,0.3062946138870863,0.6937053861129137,['stalk-surface-above-ring_s']
-0,spore-print-color_h,0.8024553571428571,0.19754464285714285,['stalk-surface-above-ring_s']
-1-1,None,0.527027027027027,0.47297297297297297,"['stalk-surface-above-ring_s', 'population_v']"
-1-0,None,0.12112171837708831,0.8788782816229117,"['stalk-surface-above-ring_s', 'population_v']"
-0-1,None,1.0,0.0,"['stalk-surface-above-ring_s', 'spore-print-color_h']"
-0-0,None,0.632016632016632,0.367983367983368,"['stalk-surface-above-ring_s', 'spore-print-color_h']"
+root,ring-type_l,0.48871563397620027,0.5112843660237998,None
+1,None,1.0,0.0,['ring-type_l']
+0,bruises_f,0.39499878611313427,0.6050012138868658,['ring-type_l']
+1-1,None,0.0,0.0,"['ring-type_l', 'stalk-surface-above-ring_f']"
+1-0,None,1.0,0.0,"['ring-type_l', 'stalk-surface-above-ring_f']"
+0-1,None,0.5788479697828139,0.421152030217186,"['ring-type_l', 'bruises_f']"
+0-0,None,0.20039980009995004,0.7996001999000499,"['ring-type_l', 'bruises_f']"

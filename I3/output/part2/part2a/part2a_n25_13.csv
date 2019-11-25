@@ -1,8 +1,8 @@
 node,split,p1,p0,feature_path
-root,stalk-color-above-ring_g,0.48871563397620027,0.5112843660237998,None
-1,None,0.0,1.0,['stalk-color-above-ring_g']
-0,gill-size_b,0.5239771227452705,0.4760228772547294,['stalk-color-above-ring_g']
-1-1,None,0.0,0.0,"['stalk-color-above-ring_g', 'gill-color_o']"
-1-0,None,0.0,1.0,"['stalk-color-above-ring_g', 'gill-color_o']"
-0-1,None,0.3345625209520617,0.6654374790479383,"['stalk-color-above-ring_g', 'gill-size_b']"
-0-0,None,0.8854766474728087,0.1145233525271913,"['stalk-color-above-ring_g', 'gill-size_b']"
+root,ring-number_o,0.48871563397620027,0.5112843660237998,None
+1,gill-attachment_a,0.518510208660534,0.481489791339466,['ring-number_o']
+0,population_v,0.17026378896882494,0.829736211031175,['ring-number_o']
+1-1,None,0.0,1.0,"['ring-number_o', 'gill-attachment_a']"
+1-0,None,0.5313865256380778,0.4686134743619223,"['ring-number_o', 'gill-attachment_a']"
+0-1,None,0.7741935483870968,0.22580645161290322,"['ring-number_o', 'population_v']"
+0-0,None,0.0647887323943662,0.9352112676056338,"['ring-number_o', 'population_v']"

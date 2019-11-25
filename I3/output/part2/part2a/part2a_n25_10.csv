@@ -1,8 +1,8 @@
 node,split,p1,p0,feature_path
-root,spore-print-color_h,0.48871563397620027,0.5112843660237998,None
-1,stalk-color-below-ring_y,0.9676409185803758,0.032359081419624215,['spore-print-color_h']
-0,gill-size_n,0.37155260469867213,0.6284473953013279,['spore-print-color_h']
-1-1,None,0.0,0.0,"['spore-print-color_h', 'stalk-color-below-ring_y']"
-1-0,None,0.9676409185803758,0.032359081419624215,"['spore-print-color_h', 'stalk-color-below-ring_y']"
-0-1,None,0.9033942558746736,0.09660574412532637,"['spore-print-color_h', 'gill-size_n']"
-0-0,None,0.02978187919463087,0.9702181208053692,"['spore-print-color_h', 'gill-size_n']"
+root,spore-print-color_y,0.48871563397620027,0.5112843660237998,None
+1,None,0.0,1.0,['spore-print-color_y']
+0,cap-surface_y,0.4918438984100764,0.5081561015899236,['spore-print-color_y']
+1-1,None,0.0,0.0,"['spore-print-color_y', 'stalk-root_e']"
+1-0,None,0.0,1.0,"['spore-print-color_y', 'stalk-root_e']"
+0-1,None,0.5397639815289892,0.46023601847101075,"['spore-print-color_y', 'cap-surface_y']"
+0-0,None,0.45957152729785766,0.5404284727021423,"['spore-print-color_y', 'cap-surface_y']"

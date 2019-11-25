@@ -1,8 +1,8 @@
 node,split,p1,p0,feature_path
-root,cap-shape_b,0.48871563397620027,0.5112843660237998,None
-1,stalk-color-above-ring_y,0.11397058823529412,0.8860294117647058,['cap-shape_b']
-0,cap-surface_g,0.510864841373316,0.48913515862668405,['cap-shape_b']
-1-1,None,0.0,0.0,"['cap-shape_b', 'stalk-color-above-ring_y']"
-1-0,None,0.11397058823529412,0.8860294117647058,"['cap-shape_b', 'stalk-color-above-ring_y']"
-0-1,None,1.0,0.0,"['cap-shape_b', 'cap-surface_g']"
-0-0,None,0.5104393214441061,0.48956067855589386,"['cap-shape_b', 'cap-surface_g']"
+root,ring-type_l,0.48871563397620027,0.5112843660237998,None
+1,None,1.0,0.0,['ring-type_l']
+0,bruises_f,0.39499878611313427,0.6050012138868658,['ring-type_l']
+1-1,None,0.0,0.0,"['ring-type_l', 'stalk-surface-above-ring_f']"
+1-0,None,1.0,0.0,"['ring-type_l', 'stalk-surface-above-ring_f']"
+0-1,None,0.5788479697828139,0.421152030217186,"['ring-type_l', 'bruises_f']"
+0-0,None,0.20039980009995004,0.7996001999000499,"['ring-type_l', 'bruises_f']"

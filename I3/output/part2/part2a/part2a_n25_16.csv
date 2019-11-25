@@ -1,8 +1,8 @@
 node,split,p1,p0,feature_path
-root,habitat_w,0.48871563397620027,0.5112843660237998,None
-1,None,0.0,1.0,['habitat_w']
-0,spore-print-color_w,0.5011571638964865,0.49884283610351354,['habitat_w']
-1-1,None,0.0,0.0,"['habitat_w', 'cap-color_w']"
-1-0,None,0.0,1.0,"['habitat_w', 'cap-color_w']"
-0-1,None,0.8171886380189366,0.18281136198106337,"['habitat_w', 'spore-print-color_w']"
-0-0,None,0.3727810650887574,0.6272189349112426,"['habitat_w', 'spore-print-color_w']"
+root,ring-type_p,0.48871563397620027,0.5112843660237998,None
+1,habitat_p,0.2171525137304605,0.7828474862695395,['ring-type_p']
+0,gill-spacing_c,0.7451136816912645,0.25488631830873554,['ring-type_p']
+1-1,None,0.0,1.0,"['ring-type_p', 'habitat_p']"
+1-0,None,0.224945295404814,0.775054704595186,"['ring-type_p', 'habitat_p']"
+0-1,None,0.9247524752475248,0.07524752475247524,"['ring-type_p', 'gill-spacing_c']"
+0-0,None,0.0,1.0,"['ring-type_p', 'gill-spacing_c']"

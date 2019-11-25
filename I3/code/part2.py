@@ -6,8 +6,8 @@ import matplotlib
 matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
 import scipy.stats as stats
+import random
 
-np.random.seed(8000)
 # -- all data ---
 path_to_data = os.path.join(os.getcwd(), '..', 'data', 'pa3_train.csv')
 data = HF.datareader(path_to_data)
@@ -30,6 +30,7 @@ for i in n:
     nlist = []
     y_pred_trn_all = np.zeros((len(data), i))
     y_pred_val_all = np.zeros((1625, i))
+    random.seed(1337)
 
     for ii in range(i):
         print (i, ii)
