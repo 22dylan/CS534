@@ -28,8 +28,8 @@ def adaboost(data, features, y, L, depth):
         h = HF.learn(data, features, y, depth, mode='adaboost') #get model
         error, errlog = calcError(h,data,features,y) #find error of model
         alpha = .5*math.log((1 - error)/error) #calc weight
-        #TODO: what happens if error = 0 or 1?, comments in slides say only if error<0.5
 
+        print('alpha: {}, error: {}'.format(alpha, error))
         newData = copy.deepcopy(data)
         #calculations for D[l+1]
         i = 0 #example index
@@ -214,7 +214,9 @@ for L in learners:
 # Print Result Summary
 print('\nRun Complete')
 for i in range(len(what_all)):
-    print('{}: wrong_train: {}, wrong_val: {}'.format(what_all[i],wrong_train_all[i],wrong_val_all[i]))
+    print('{}: wrong_train: {}%, wrong_val: {}%'.format(what_all[i],\
+        1-(wrong_train_all[i]/len(data)),\
+            1-(wrong_val_all[i]/len(val_data))))
 
 # Run best on test dataset
 best_adaboost = wrong_val_all.index(min(wrong_val_all))
