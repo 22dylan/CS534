@@ -1,8 +1,8 @@
 node,split,p1,p0,feature_path
-root,gill-size_n,0.48871563397620027,0.5112843660237998,None
-1,stalk-surface-below-ring_s,0.8854766474728087,0.1145233525271913,['gill-size_n']
-0,ring-number_n,0.3014195107218363,0.6985804892781637,['gill-size_n']
-1-1,None,0.8633540372670807,0.13664596273291926,"['gill-size_n', 'stalk-surface-below-ring_s']"
-1-0,None,0.9212730318257957,0.07872696817420435,"['gill-size_n', 'stalk-surface-below-ring_s']"
-0-1,None,1.0,0.0,"['gill-size_n', 'ring-number_n']"
-0-0,None,0.2965328467153285,0.7034671532846716,"['gill-size_n', 'ring-number_n']"
+root,gill-color_y,0.48871563397620027,0.5112843660237998,None
+1,gill-color_u,0.24489795918367346,0.7551020408163265,['gill-color_y']
+0,cap-shape_b,0.49119170984455957,0.5088082901554404,['gill-color_y']
+1-1,None,0.0,0.0,"['gill-color_y', 'gill-color_u']"
+1-0,None,0.24489795918367346,0.7551020408163265,"['gill-color_y', 'gill-color_u']"
+0-1,None,0.11787072243346007,0.8821292775665399,"['gill-color_y', 'cap-shape_b']"
+0-0,None,0.5127137220517317,0.4872862779482683,"['gill-color_y', 'cap-shape_b']"

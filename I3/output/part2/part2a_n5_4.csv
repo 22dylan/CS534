@@ -1,8 +1,8 @@
 node,split,p1,p0,feature_path
-root,odor_s,0.48871563397620027,0.5112843660237998,None
-1,None,1.0,0.0,['odor_s']
-0,stalk-color-above-ring_y,0.45218729391074963,0.5478127060892504,['odor_s']
-1-1,None,0.0,0.0,"['odor_s', 'habitat_m']"
-1-0,None,1.0,0.0,"['odor_s', 'habitat_m']"
-0-1,None,0.0,0.0,"['odor_s', 'stalk-color-above-ring_y']"
-0-0,None,0.45218729391074963,0.5478127060892504,"['odor_s', 'stalk-color-above-ring_y']"
+root,cap-color_c,0.48871563397620027,0.5112843660237998,None
+1,population_n,0.21212121212121213,0.7878787878787878,['cap-color_c']
+0,stalk-color-above-ring_n,0.4906011154720099,0.5093988845279901,['cap-color_c']
+1-1,None,0.0,0.0,"['cap-color_c', 'population_n']"
+1-0,None,0.21212121212121213,0.7878787878787878,"['cap-color_c', 'population_n']"
+0-1,None,0.9437751004016064,0.05622489959839357,"['cap-color_c', 'stalk-color-above-ring_n']"
+0-0,None,0.46602787456445993,0.5339721254355401,"['cap-color_c', 'stalk-color-above-ring_n']"

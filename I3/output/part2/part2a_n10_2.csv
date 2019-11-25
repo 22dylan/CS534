@@ -1,8 +1,8 @@
 node,split,p1,p0,feature_path
-root,bruises_t,0.48871563397620027,0.5112843660237998,None
-1,odor_n,0.20039980009995004,0.7996001999000499,['bruises_t']
-0,veil-color_w,0.6895231465367212,0.3104768534632788,['bruises_t']
-1-1,None,0.04802021903959562,0.9519797809604044,"['bruises_t', 'odor_n']"
-1-0,None,0.4226044226044226,0.5773955773955773,"['bruises_t', 'odor_n']"
-0-1,None,0.7164556962025317,0.28354430379746837,"['bruises_t', 'veil-color_w']"
-0-0,None,0.0,1.0,"['bruises_t', 'veil-color_w']"
+root,odor_l,0.48871563397620027,0.5112843660237998,None
+1,None,0.0,1.0,['odor_l']
+0,habitat_l,0.5125887669464171,0.48741123305358297,['odor_l']
+1-1,None,0.0,0.0,"['odor_l', 'stalk-surface-above-ring_y']"
+1-0,None,0.0,1.0,"['odor_l', 'stalk-surface-above-ring_y']"
+0-1,None,0.7214137214137214,0.2785862785862786,"['odor_l', 'habitat_l']"
+0-0,None,0.4884781565050408,0.5115218434949592,"['odor_l', 'habitat_l']"
