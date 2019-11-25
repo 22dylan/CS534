@@ -1,0 +1,8 @@
+node,split,p1,p0,feature_path
+root,habitat_w,0.48871563397620027,0.5112843660237998,None
+1,None,0.0,1.0,['habitat_w']
+0,stalk-color-below-ring_c,0.5011571638964865,0.49884283610351354,['habitat_w']
+1-1,None,0.0,0.0,"['habitat_w', 'bruises_f']"
+1-0,None,0.0,1.0,"['habitat_w', 'bruises_f']"
+0-1,None,1.0,0.0,"['habitat_w', 'stalk-color-below-ring_c']"
+0-0,None,0.49873150105708247,0.5012684989429176,"['habitat_w', 'stalk-color-below-ring_c']"

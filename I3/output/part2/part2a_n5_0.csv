@@ -1,0 +1,8 @@
+node,split,p1,p0,feature_path
+root,population_s,0.48871563397620027,0.5112843660237998,None
+1,gill-attachment_f,0.3119891008174387,0.6880108991825613,['population_s']
+0,habitat_u,0.520048309178744,0.47995169082125605,['population_s']
+1-1,None,0.3119891008174387,0.6880108991825613,"['population_s', 'gill-attachment_f']"
+1-0,None,0.0,0.0,"['population_s', 'gill-attachment_f']"
+0-1,None,0.5911949685534591,0.4088050314465409,"['population_s', 'habitat_u']"
+0-0,None,0.5172067319768903,0.4827932680231098,"['population_s', 'habitat_u']"

@@ -3,6 +3,7 @@ import pandas as pd
 import copy
 import itertools
 import os
+import random
 
 
 def datareader(path_to_data):
@@ -22,7 +23,7 @@ def datareader(path_to_data):
     return df
 
 
-def split_tree(tree, node, features, y, depth, mode='DT'):
+def split_tree(tree, node, features, y, depth, m, mode='DT'):
     """
         splitting tree based on a given feature.
         steps:
@@ -45,7 +46,7 @@ def split_tree(tree, node, features, y, depth, mode='DT'):
             children = ['1', '0']
         else:
             children = [node + '-1', node + '-0']
-
+        mcount=0
         sel_B = 0
         sel_feature = features[0]
         for feature in features:
@@ -96,7 +97,7 @@ def split_tree(tree, node, features, y, depth, mode='DT'):
                 U_1 = 1 - (p1_1 ** 2) - (p1_0 ** 2)
                 U_0 = 1 - (p0_1 ** 2) - (p0_0 ** 2)
                 B = tree[node]['U'] - p1 * U_1 - p0 * U_0
-                if B > sel_B:
+                if B >= sel_B:
                     continue_tf_1 = True
                     continue_tf_0 = True
 
@@ -127,7 +128,9 @@ def split_tree(tree, node, features, y, depth, mode='DT'):
 
                     if (c0_1 == 0) or (c0_0 == 0):
                         continue_tf_0 = False
-
+                mcount=mcount+1
+                if mcount == m-1:
+                    break
         if node == 'root':
             tree[node]['feature_path'].append(sel_feature)
             tree[node]['split_on'] = sel_feature
@@ -156,12 +159,14 @@ def get_children_nodes(tree, node):
     return children
 
 
-def populate_tree(tree, features, y, depth, mode='DT'):
+def populate_tree(tree, features, y, depth,  m, bagging, mode='DT'):
     nodes = list(tree.keys())
     for node in nodes:
         if (len(node.split('-')) == depth) and (node != 'root'):
             continue
-        tree, continue_tf_1, continue_tf_0 = split_tree(tree, node, features, y, depth, mode)
+        if bagging==1:
+            features = random.sample(features, len(features))
+        tree, continue_tf_1, continue_tf_0 = split_tree(tree, node, features, y, depth, m, mode)
 
         if continue_tf_0 == False:
             tree = remove_children(tree, node, '0')
@@ -258,9 +263,9 @@ def print_tree(tree):
         print('____________________________________________')
 
 
-def learn(data, features, y, depth, mode='DT', view_tree=False):
+def learn(data, features, y, depth, mode='DT', view_tree=False, m=10000000000000, bagging=0):
     tree = build_empty_tree(data, features, y, depth, mode)
-    tree = populate_tree(tree, features, y, depth, mode=mode)
+    tree = populate_tree(tree, features, y, depth, m, bagging, mode)
     tree = {i: j for i, j in tree.items() if tree[i]['p1'] != None}  # removing empty keys
 
     if view_tree == True:

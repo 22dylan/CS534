@@ -1,0 +1,8 @@
+node,split,p1,p0,feature_path
+root,gill-color_e,0.48871563397620027,0.5112843660237998,None
+1,None,0.0,1.0,['gill-color_e']
+0,ring-number_n,0.4946013289036545,0.5053986710963455,['gill-color_e']
+1-1,None,0.0,0.0,"['gill-color_e', 'gill-spacing_w']"
+1-0,None,0.0,1.0,"['gill-color_e', 'gill-spacing_w']"
+0-1,None,1.0,0.0,"['gill-color_e', 'ring-number_n']"
+0-0,None,0.4921760901314417,0.5078239098685583,"['gill-color_e', 'ring-number_n']"

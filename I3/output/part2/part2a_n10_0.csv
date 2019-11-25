@@ -1,0 +1,8 @@
+node,split,p1,p0,feature_path
+root,stalk-root_r,0.48871563397620027,0.5112843660237998,None
+1,None,0.0,1.0,['stalk-root_r']
+0,cap-shape_f,0.49895266024298285,0.5010473397570172,['stalk-root_r']
+1-1,None,0.0,0.0,"['stalk-root_r', 'odor_s']"
+1-0,None,0.0,1.0,"['stalk-root_r', 'odor_s']"
+0-1,None,0.49498886414253895,0.505011135857461,"['stalk-root_r', 'cap-shape_f']"
+0-0,None,0.5013431833445265,0.49865681665547346,"['stalk-root_r', 'cap-shape_f']"

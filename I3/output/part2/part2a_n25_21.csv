@@ -1,0 +1,8 @@
+node,split,p1,p0,feature_path
+root,veil-color_n,0.48871563397620027,0.5112843660237998,None
+1,None,0.0,1.0,['veil-color_n']
+0,gill-spacing_c,0.4941908713692946,0.5058091286307054,['veil-color_n']
+1-1,None,0.0,1.0,"['veil-color_n', 'stalk-color-above-ring_o']"
+1-0,None,0.0,0.0,"['veil-color_n', 'stalk-color-above-ring_o']"
+0-1,None,0.5751617720258835,0.42483822797411647,"['veil-color_n', 'gill-spacing_c']"
+0-0,None,0.0885286783042394,0.9114713216957606,"['veil-color_n', 'gill-spacing_c']"

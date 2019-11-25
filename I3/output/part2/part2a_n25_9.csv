@@ -1,0 +1,8 @@
+node,split,p1,p0,feature_path
+root,habitat_u,0.48871563397620027,0.5112843660237998,None
+1,veil-color_w,0.7198275862068966,0.2801724137931034,['habitat_u']
+0,population_n,0.47716501507970704,0.522834984920293,['habitat_u']
+1-1,None,0.7198275862068966,0.2801724137931034,"['habitat_u', 'veil-color_w']"
+1-0,None,0.0,0.0,"['habitat_u', 'veil-color_w']"
+0-1,None,0.0,1.0,"['habitat_u', 'population_n']"
+0-0,None,0.5066331198536139,0.4933668801463861,"['habitat_u', 'population_n']"

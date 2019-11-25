@@ -1,0 +1,8 @@
+node,split,p1,p0,feature_path
+root,stalk-surface-below-ring_y,0.48871563397620027,0.5112843660237998,None
+1,stalk-surface-above-ring_s,0.3048780487804878,0.6951219512195121,['stalk-surface-below-ring_y']
+0,bruises_t,0.4951167728237792,0.5048832271762208,['stalk-surface-below-ring_y']
+1-1,None,0.0,1.0,"['stalk-surface-below-ring_y', 'stalk-surface-above-ring_s']"
+1-0,None,0.78125,0.21875,"['stalk-surface-below-ring_y', 'stalk-surface-above-ring_s']"
+0-1,None,0.21094160967911627,0.7890583903208838,"['stalk-surface-below-ring_y', 'bruises_t']"
+0-0,None,0.687433250266999,0.3125667497330011,"['stalk-surface-below-ring_y', 'bruises_t']"
