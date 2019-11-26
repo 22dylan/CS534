@@ -1,0 +1,8 @@
+node,split,p1,p0,feature_path
+root,ring-type_l,0.4778416085350841,0.5221583914649158,None
+1,None,1.0,0.0,['ring-type_l']
+0,gill-color_b,0.3794196537429895,0.6205803462570105,['ring-type_l']
+1-1,None,0.0,0.0,"['ring-type_l', 'gill-attachment_a']"
+1-0,None,1.0,0.0,"['ring-type_l', 'gill-attachment_a']"
+0-1,None,1.0,0.0,"['ring-type_l', 'gill-color_b']"
+0-0,None,0.17450535192993838,0.8254946480700617,"['ring-type_l', 'gill-color_b']"

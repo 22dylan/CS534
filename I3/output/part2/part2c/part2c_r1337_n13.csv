@@ -1,0 +1,8 @@
+node,split,p1,p0,feature_path
+root,gill-size_b,0.48871563397620027,0.5112843660237998,None
+1,ring-type_l,0.3066191748293262,0.6933808251706738,['gill-size_b']
+0,population_y,0.8963455149501661,0.10365448504983389,['gill-size_b']
+1-1,None,1.0,0.0,"['gill-size_b', 'ring-type_l']"
+1-0,None,0.09946029298380879,0.9005397070161912,"['gill-size_b', 'ring-type_l']"
+0-1,None,0.0,1.0,"['gill-size_b', 'population_y']"
+0-0,None,0.9233401779603012,0.07665982203969883,"['gill-size_b', 'population_y']"

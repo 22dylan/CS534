@@ -1,0 +1,8 @@
+node,split,p1,p0,feature_path
+root,odor_f,0.4729175215428806,0.5270824784571194,None
+1,None,1.0,0.0,['odor_f']
+0,gill-size_b,0.2885627250069233,0.7114372749930767,['odor_f']
+1-1,None,0.0,0.0,"['odor_f', 'spore-print-color_k']"
+1-0,None,1.0,0.0,"['odor_f', 'spore-print-color_k']"
+0-1,None,0.0236734693877551,0.976326530612245,"['odor_f', 'gill-size_b']"
+0-0,None,0.8475452196382429,0.1524547803617571,"['odor_f', 'gill-size_b']"

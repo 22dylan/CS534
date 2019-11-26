@@ -1,0 +1,8 @@
+node,split,p1,p0,feature_path
+root,gill-size_n,0.47373820270824785,0.5262617972917522,None
+1,stalk-surface-above-ring_f,0.8947001394700139,0.10529986052998605,['gill-size_n']
+0,bruises_f,0.2982558139534884,0.7017441860465117,['gill-size_n']
+1-1,None,0.0,1.0,"['gill-size_n', 'stalk-surface-above-ring_f']"
+1-0,None,0.9054340155257586,0.09456598447424136,"['gill-size_n', 'stalk-surface-above-ring_f']"
+0-1,None,0.5249513933895009,0.475048606610499,"['gill-size_n', 'bruises_f']"
+0-0,None,0.11386399578281498,0.8861360042171851,"['gill-size_n', 'bruises_f']"

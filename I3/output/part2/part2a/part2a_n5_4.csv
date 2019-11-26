@@ -1,8 +1,8 @@
 node,split,p1,p0,feature_path
-root,stalk-root_?,0.48871563397620027,0.5112843660237998,None
-1,ring-number_t,0.7091737150292778,0.29082628497072216,['stalk-root_?']
-0,cap-color_b,0.38717410848067124,0.6128258915193288,['stalk-root_?']
-1-1,None,0.0,1.0,"['stalk-root_?', 'ring-number_t']"
-1-0,None,0.886899918633035,0.11310008136696502,"['stalk-root_?', 'ring-number_t']"
-0-1,None,1.0,0.0,"['stalk-root_?', 'cap-color_b']"
-0-0,None,0.37018786572220513,0.6298121342777949,"['stalk-root_?', 'cap-color_b']"
+root,cap-shape_b,0.48871563397620027,0.5112843660237998,None
+1,population_v,0.11397058823529412,0.8860294117647058,['cap-shape_b']
+0,stalk-root_?,0.510864841373316,0.48913515862668405,['cap-shape_b']
+1-1,None,0.574468085106383,0.425531914893617,"['cap-shape_b', 'population_v']"
+1-0,None,0.017777777777777778,0.9822222222222222,"['cap-shape_b', 'population_v']"
+0-1,None,0.7482806052269602,0.2517193947730399,"['cap-shape_b', 'stalk-root_?']"
+0-0,None,0.40120711562897077,0.5987928843710292,"['cap-shape_b', 'stalk-root_?']"

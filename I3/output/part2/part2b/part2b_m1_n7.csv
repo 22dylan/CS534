@@ -1,0 +1,8 @@
+node,split,p1,p0,feature_path
+root,spore-print-color_k,0.4800984817398441,0.519901518260156,None
+1,stalk-surface-above-ring_k,0.12376681614349776,0.8762331838565023,['spore-print-color_k']
+0,cap-color_r,0.5857940941739824,0.4142059058260176,['spore-print-color_k']
+1-1,None,0.0,0.0,"['spore-print-color_k', 'stalk-surface-above-ring_k']"
+1-0,None,0.12376681614349776,0.8762331838565023,"['spore-print-color_k', 'stalk-surface-above-ring_k']"
+0-1,None,0.0,1.0,"['spore-print-color_k', 'cap-color_r']"
+0-0,None,0.5865743207245605,0.41342567927543955,"['spore-print-color_k', 'cap-color_r']"

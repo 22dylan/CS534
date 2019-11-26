@@ -1,0 +1,8 @@
+node,split,p1,p0,feature_path
+root,ring-type_p,0.47845711940910957,0.5215428805908905,None
+1,odor_f,0.21366817620419926,0.7863318237958007,['ring-type_p']
+0,gill-color_n,0.7415132924335378,0.2584867075664622,['ring-type_p']
+1-1,None,1.0,0.0,"['ring-type_p', 'odor_f']"
+1-0,None,0.14732142857142858,0.8526785714285714,"['ring-type_p', 'odor_f']"
+0-1,None,0.0,1.0,"['ring-type_p', 'gill-color_n']"
+0-0,None,0.7818025010780509,0.21819749892194912,"['ring-type_p', 'gill-color_n']"

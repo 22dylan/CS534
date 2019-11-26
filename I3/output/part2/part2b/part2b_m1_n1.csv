@@ -1,0 +1,8 @@
+node,split,p1,p0,feature_path
+root,ring-type_l,0.47968814115716046,0.5203118588428396,None
+1,None,1.0,0.0,['ring-type_l']
+0,bruises_f,0.3773631230051559,0.622636876994844,['ring-type_l']
+1-1,None,0.0,0.0,"['ring-type_l', 'stalk-color-above-ring_c']"
+1-0,None,1.0,0.0,"['ring-type_l', 'stalk-color-above-ring_c']"
+0-1,None,0.5732196589769308,0.4267803410230692,"['ring-type_l', 'bruises_f']"
+0-0,None,0.18951418951418952,0.8104858104858105,"['ring-type_l', 'bruises_f']"

@@ -1,0 +1,8 @@
+node,split,p1,p0,feature_path
+root,stalk-surface-above-ring_k,0.4788674599917932,0.5211325400082069,None
+1,ring-number_t,0.940014114326041,0.05998588567395907,['stalk-surface-above-ring_k']
+0,odor_f,0.28984668787966444,0.7101533121203355,['stalk-surface-above-ring_k']
+1-1,None,0.0,1.0,"['stalk-surface-above-ring_k', 'ring-number_t']"
+1-0,None,1.0,0.0,"['stalk-surface-above-ring_k', 'ring-number_t']"
+0-1,None,1.0,0.0,"['stalk-surface-above-ring_k', 'odor_f']"
+0-0,None,0.2144,0.7856,"['stalk-surface-above-ring_k', 'odor_f']"

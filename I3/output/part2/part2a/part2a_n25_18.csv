@@ -1,8 +1,8 @@
 node,split,p1,p0,feature_path
-root,cap-shape_k,0.48871563397620027,0.5112843660237998,None
-1,spore-print-color_y,0.6925795053003534,0.30742049469964666,['cap-shape_k']
-0,veil-color_o,0.4619312906220984,0.5380687093779016,['cap-shape_k']
-1-1,None,0.0,1.0,"['cap-shape_k', 'spore-print-color_y']"
-1-0,None,0.7012522361359571,0.29874776386404295,"['cap-shape_k', 'spore-print-color_y']"
-0-1,None,0.0,1.0,"['cap-shape_k', 'veil-color_o']"
-0-0,None,0.465714954364615,0.5342850456353849,"['cap-shape_k', 'veil-color_o']"
+root,spore-print-color_y,0.48871563397620027,0.5112843660237998,None
+1,None,0.0,1.0,['spore-print-color_y']
+0,stalk-root_e,0.4918438984100764,0.5081561015899236,['spore-print-color_y']
+1-1,None,0.0,1.0,"['spore-print-color_y', 'spore-print-color_y']"
+1-0,None,0.0,0.0,"['spore-print-color_y', 'spore-print-color_y']"
+0-1,None,0.24641833810888253,0.7535816618911175,"['spore-print-color_y', 'stalk-root_e']"
+0-0,None,0.5331724969843185,0.46682750301568154,"['spore-print-color_y', 'stalk-root_e']"

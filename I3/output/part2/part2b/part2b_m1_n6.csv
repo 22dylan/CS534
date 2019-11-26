@@ -1,0 +1,8 @@
+node,split,p1,p0,feature_path
+root,cap-surface_g,0.4987689782519491,0.5012310217480509,None
+1,None,1.0,0.0,['cap-surface_g']
+0,bruises_t,0.4984602750975159,0.5015397249024841,['cap-surface_g']
+1-1,None,1.0,0.0,"['cap-surface_g', 'cap-surface_g']"
+1-0,None,0.0,0.0,"['cap-surface_g', 'cap-surface_g']"
+0-1,None,0.21358748778103617,0.7864125122189638,"['cap-surface_g', 'bruises_t']"
+0-0,None,0.7047787610619469,0.2952212389380531,"['cap-surface_g', 'bruises_t']"

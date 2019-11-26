@@ -1,0 +1,8 @@
+node,split,p1,p0,feature_path
+root,gill-size_n,0.4899466557242511,0.5100533442757489,None
+1,gill-spacing_c,0.8925566343042072,0.10744336569579288,['gill-size_n']
+0,odor_f,0.3030940222288976,0.6969059777711024,['gill-size_n']
+1-1,None,0.9493392070484582,0.05066079295154185,"['gill-size_n', 'gill-spacing_c']"
+1-0,None,0.46994535519125685,0.5300546448087432,"['gill-size_n', 'gill-spacing_c']"
+0-1,None,1.0,0.0,"['gill-size_n', 'odor_f']"
+0-0,None,0.031315240083507306,0.9686847599164927,"['gill-size_n', 'odor_f']"

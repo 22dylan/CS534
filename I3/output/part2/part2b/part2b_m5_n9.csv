@@ -1,0 +1,8 @@
+node,split,p1,p0,feature_path
+root,population_n,0.4868691013541239,0.5131308986458761,None
+1,None,0.0,1.0,['population_n']
+0,gill-size_b,0.5095555078376637,0.49044449216233627,['population_n']
+1-1,None,0.0,0.0,"['population_n', 'cap-color_b']"
+1-0,None,0.0,1.0,"['population_n', 'cap-color_b']"
+0-1,None,0.32573599240265905,0.674264007597341,"['population_n', 'gill-size_b']"
+0-0,None,0.897196261682243,0.102803738317757,"['population_n', 'gill-size_b']"

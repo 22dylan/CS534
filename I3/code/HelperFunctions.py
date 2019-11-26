@@ -165,6 +165,7 @@ def populate_tree(tree, features, y, depth,  m, bagging, mode='DT'):
         if (len(node.split('-')) == depth) and (node != 'root'):
             continue
         if bagging==1:
+            #random.seed(888)
             features = random.sample(features, len(features))
         tree, continue_tf_1, continue_tf_0 = split_tree(tree, node, features, y, depth, m, mode)
 
@@ -412,5 +413,3 @@ def useTree(tree, ex):
 
         node = newNode
 
-def bag_predict(self, x):
-    return np.mean([t.predict(x) for t in self.trees], axis=0)

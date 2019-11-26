@@ -1,0 +1,8 @@
+node,split,p1,p0,feature_path
+root,ring-number_o,0.4743537135822733,0.5256462864177267,None
+1,cap-color_b,0.5016692632984643,0.4983307367015357,['ring-number_o']
+0,odor_f,0.15223097112860892,0.847769028871391,['ring-number_o']
+1-1,None,1.0,0.0,"['ring-number_o', 'cap-color_b']"
+1-0,None,0.49412562132851334,0.5058743786714867,"['ring-number_o', 'cap-color_b']"
+0-1,None,0.0,0.0,"['ring-number_o', 'odor_f']"
+0-0,None,0.15223097112860892,0.847769028871391,"['ring-number_o', 'odor_f']"

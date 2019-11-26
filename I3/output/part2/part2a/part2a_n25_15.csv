@@ -1,8 +1,8 @@
 node,split,p1,p0,feature_path
-root,odor_y,0.48871563397620027,0.5112843660237998,None
-1,None,1.0,0.0,['odor_y']
-0,cap-shape_b,0.4465911614479236,0.5534088385520763,['odor_y']
-1-1,None,1.0,0.0,"['odor_y', 'habitat_p']"
-1-0,None,1.0,0.0,"['odor_y', 'habitat_p']"
-0-1,None,0.11397058823529412,0.8860294117647058,"['odor_y', 'cap-shape_b']"
-0-0,None,0.4679744741195935,0.5320255258804065,"['odor_y', 'cap-shape_b']"
+root,gill-color_u,0.48871563397620027,0.5112843660237998,None
+1,cap-color_e,0.11328125,0.88671875,['gill-color_u']
+0,veil-color_w,0.5095279341706367,0.49047206582936337,['gill-color_u']
+1-1,None,0.0,1.0,"['gill-color_u', 'cap-color_e']"
+1-0,None,0.1638418079096045,0.8361581920903954,"['gill-color_u', 'cap-color_e']"
+0-1,None,0.521729490022173,0.47827050997782705,"['gill-color_u', 'veil-color_w']"
+0-0,None,0.0,1.0,"['gill-color_u', 'veil-color_w']"

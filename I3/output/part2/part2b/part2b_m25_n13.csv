@@ -1,0 +1,8 @@
+node,split,p1,p0,feature_path
+root,gill-size_b,0.4807139926138695,0.5192860073861305,None
+1,stalk-root_b,0.30416789831510493,0.6958321016848951,['gill-size_b']
+0,spore-print-color_w,0.8812877263581489,0.11871227364185111,['gill-size_b']
+1-1,None,0.48197981739548296,0.5180201826045171,"['gill-size_b', 'stalk-root_b']"
+1-0,None,0.019969278033794162,0.9800307219662059,"['gill-size_b', 'stalk-root_b']"
+0-1,None,0.9750922509225092,0.024907749077490774,"['gill-size_b', 'spore-print-color_w']"
+0-0,None,0.6314496314496314,0.36855036855036855,"['gill-size_b', 'spore-print-color_w']"

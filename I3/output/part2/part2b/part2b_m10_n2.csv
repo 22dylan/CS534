@@ -1,0 +1,8 @@
+node,split,p1,p0,feature_path
+root,habitat_p,0.4876897825194912,0.5123102174805089,None
+1,population_s,0.8865546218487395,0.1134453781512605,['habitat_p']
+0,odor_f,0.41923076923076924,0.5807692307692308,['habitat_p']
+1-1,None,0.0,1.0,"['habitat_p', 'population_s']"
+1-0,None,0.9254385964912281,0.07456140350877193,"['habitat_p', 'population_s']"
+0-1,None,1.0,0.0,"['habitat_p', 'odor_f']"
+0-0,None,0.2631899969502897,0.7368100030497102,"['habitat_p', 'odor_f']"
