@@ -1,0 +1,8 @@
+node,split,p1,p0,feature_path
+root,odor_a,0.47968814115716046,0.5203118588428396,None
+1,None,0.0,1.0,['odor_a']
+0,cap-color_b,0.5055135135135135,0.49448648648648647,['odor_a']
+1-1,None,0.0,1.0,"['odor_a', 'stalk-color-above-ring_w']"
+1-0,None,0.0,0.0,"['odor_a', 'stalk-color-above-ring_w']"
+0-1,None,0.8189655172413793,0.1810344827586207,"['odor_a', 'cap-color_b']"
+0-0,None,0.497449545353737,0.502550454646263,"['odor_a', 'cap-color_b']"

@@ -1,0 +1,8 @@
+node,split,p1,p0,feature_path
+root,odor_c,0.48153467377923675,0.5184653262207632,None
+1,None,1.0,0.0,['odor_c']
+0,cap-shape_k,0.47122829043733,0.5287717095626701,['odor_c']
+1-1,None,0.0,0.0,"['odor_c', 'cap-color_y']"
+1-0,None,1.0,0.0,"['odor_c', 'cap-color_y']"
+0-1,None,0.705078125,0.294921875,"['odor_c', 'cap-shape_k']"
+0-0,None,0.44316850246074524,0.5568314975392548,"['odor_c', 'cap-shape_k']"

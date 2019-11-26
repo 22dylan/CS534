@@ -1,0 +1,8 @@
+node,split,p1,p0,feature_path
+root,odor_f,0.47722609766105867,0.5227739023389413,None
+1,None,1.0,0.0,['odor_f']
+0,gill-size_n,0.29768467475192945,0.7023153252480706,['odor_f']
+1-1,None,1.0,0.0,"['odor_f', 'gill-color_b']"
+1-0,None,1.0,0.0,"['odor_f', 'gill-color_b']"
+0-1,None,0.8579931972789115,0.14200680272108843,"['odor_f', 'gill-size_n']"
+0-0,None,0.02895595432300163,0.9710440456769984,"['odor_f', 'gill-size_n']"

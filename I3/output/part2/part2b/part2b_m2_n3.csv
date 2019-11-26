@@ -1,0 +1,8 @@
+node,split,p1,p0,feature_path
+root,population_n,0.4743537135822733,0.5256462864177267,None
+1,None,0.0,1.0,['population_n']
+0,odor_c,0.4982758620689655,0.5017241379310344,['population_n']
+1-1,None,0.0,0.0,"['population_n', 'cap-color_c']"
+1-0,None,0.0,1.0,"['population_n', 'cap-color_c']"
+0-1,None,1.0,0.0,"['population_n', 'odor_c']"
+0-0,None,0.4849557522123894,0.5150442477876106,"['population_n', 'odor_c']"

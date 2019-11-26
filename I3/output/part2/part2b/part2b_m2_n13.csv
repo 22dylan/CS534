@@ -1,0 +1,8 @@
+node,split,p1,p0,feature_path
+root,ring-number_o,0.4807139926138695,0.5192860073861305,None
+1,gill-attachment_a,0.5064732142857142,0.4935267857142857,['ring-number_o']
+0,population_v,0.18781725888324874,0.8121827411167513,['ring-number_o']
+1-1,None,0.0,1.0,"['ring-number_o', 'gill-attachment_a']"
+1-0,None,0.5178000912825194,0.4821999087174806,"['ring-number_o', 'gill-attachment_a']"
+0-1,None,0.9152542372881356,0.0847457627118644,"['ring-number_o', 'population_v']"
+0-0,None,0.05970149253731343,0.9402985074626866,"['ring-number_o', 'population_v']"

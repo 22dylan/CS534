@@ -1,0 +1,8 @@
+node,split,p1,p0,feature_path
+root,odor_n,0.48030365203118586,0.5196963479688141,None
+1,spore-print-color_r,0.03770028275212064,0.9622997172478793,['odor_n']
+0,odor_a,0.8215843023255814,0.17841569767441862,['odor_n']
+1-1,None,1.0,0.0,"['odor_n', 'spore-print-color_r']"
+1-0,None,0.014954172696575013,0.9850458273034249,"['odor_n', 'spore-print-color_r']"
+0-1,None,0.0,1.0,"['odor_n', 'odor_a']"
+0-0,None,0.9040383846461415,0.09596161535385846,"['odor_n', 'odor_a']"

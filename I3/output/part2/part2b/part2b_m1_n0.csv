@@ -1,0 +1,8 @@
+node,split,p1,p0,feature_path
+root,stalk-color-below-ring_p,0.4854329093147312,0.5145670906852687,None
+1,bruises_t,0.6789069171648164,0.3210930828351836,['stalk-color-below-ring_p']
+0,stalk-shape_t,0.4242506076154469,0.575749392384553,['stalk-color-below-ring_p']
+1-1,None,0.0,1.0,"['stalk-color-below-ring_p', 'bruises_t']"
+1-0,None,1.0,0.0,"['stalk-color-below-ring_p', 'bruises_t']"
+0-1,None,0.34657236126224156,0.6534276387377584,"['stalk-color-below-ring_p', 'stalk-shape_t']"
+0-0,None,0.500804289544236,0.49919571045576405,"['stalk-color-below-ring_p', 'stalk-shape_t']"

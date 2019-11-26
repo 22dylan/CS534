@@ -1,0 +1,8 @@
+node,split,p1,p0,feature_path
+root,stalk-root_?,0.4743537135822733,0.5256462864177267,None
+1,ring-number_t,0.7190201729106628,0.28097982708933716,['stalk-root_?']
+0,bruises_t,0.3769363166953528,0.6230636833046471,['stalk-root_?']
+1-1,None,0.0,1.0,"['stalk-root_?', 'ring-number_t']"
+1-0,None,0.8918677390527256,0.10813226094727435,"['stalk-root_?', 'ring-number_t']"
+0-1,None,0.19192422731804587,0.8080757726819542,"['stalk-root_?', 'bruises_t']"
+0-0,None,0.6277027027027027,0.3722972972972973,"['stalk-root_?', 'bruises_t']"

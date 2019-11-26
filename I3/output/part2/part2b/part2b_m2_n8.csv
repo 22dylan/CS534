@@ -1,0 +1,8 @@
+node,split,p1,p0,feature_path
+root,stalk-root_r,0.48173984407057857,0.5182601559294214,None
+1,None,0.0,1.0,['stalk-root_r']
+0,population_a,0.4923464038582512,0.5076535961417488,['stalk-root_r']
+1-1,None,0.0,0.0,"['stalk-root_r', 'gill-color_o']"
+1-0,None,0.0,1.0,"['stalk-root_r', 'gill-color_o']"
+0-1,None,0.0,1.0,"['stalk-root_r', 'population_a']"
+0-0,None,0.5182079011255794,0.48179209887442065,"['stalk-root_r', 'population_a']"

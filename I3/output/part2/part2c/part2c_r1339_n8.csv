@@ -1,0 +1,8 @@
+node,split,p1,p0,feature_path
+root,bruises_t,0.4774312679524005,0.5225687320475995,None
+1,spore-print-color_h,0.1878001921229587,0.8121998078770413,['bruises_t']
+0,gill-spacing_c,0.6934097421203438,0.30659025787965616,['bruises_t']
+1-1,None,1.0,0.0,"['bruises_t', 'spore-print-color_h']"
+1-0,None,0.10670892762810354,0.8932910723718964,"['bruises_t', 'spore-print-color_h']"
+0-1,None,0.894184938036225,0.10581506196377502,"['bruises_t', 'gill-spacing_c']"
+0-0,None,0.08645533141210375,0.9135446685878963,"['bruises_t', 'gill-spacing_c']"
