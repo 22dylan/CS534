@@ -11,8 +11,8 @@ python and package information
 python      3.7
 numpy       1.17.2
 pandas      0.25.1
-pickle      (native to python)
 matplotlib  3.1.1
+
 
 commands to run code: 
       to train and validate data:   python Part1_Train.py
